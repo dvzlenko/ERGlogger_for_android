@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TActivity">
+
+    <DatePicker
+        android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:scaleX=".8"
+        android:scaleY=".8"
+        android:theme="@style/NumberPickerStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_start" />
+
+    <DatePicker
+        android:id="@+id/stopDate"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:scaleX=".8"
+        android:scaleY=".8"
+        android:theme="@style/NumberPickerStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_finish" />
+
+    <TimePicker
+        android:id="@+id/startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="200dp"
+        android:headerBackground="#0f0f0f00"
+        android:scaleX=".8"
+        android:scaleY=".8"
+        android:theme="@style/NumberPickerStyle"
+        android:timePickerMode="spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/startDate" />
+
+    <TimePicker
+        android:id="@+id/stopTime"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="200dp"
+        android:headerBackground="#0f0f0f00"
+        android:scaleX=".8"
+        android:scaleY=".8"
+        android:theme="@style/NumberPickerStyle"
+        android:timePickerMode="spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/stopDate" />
+
+    <TextView
+        android:id="@+id/DevName"
+        android:layout_width="110pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/DevName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dev1" />
+
+    <TextView
+        android:id="@+id/text_DCS"
+        android:layout_width="90pt"
+        android:layout_height="10pt"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/text_DCS"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dev_B" />
+
+    <TextView
+        android:id="@+id/text_start"
+        android:layout_width="90pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/text_start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+
+    <TextView
+        android:id="@+id/text_finish"
+        android:layout_width="90pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="110dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/text_finish"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+
+    <TextView
+        android:id="@+id/text_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="20pt"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="230dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/text_interval"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+
+    <Button
+        android:id="@+id/dev_B"
+        android:layout_width="40pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="15dp"
+        android:hint="@string/dev_B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DevName" />
+
+    <Button
+        android:id="@+id/time_B"
+        android:layout_width="40pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="10dp"
+        android:hint="@string/time_B"
+        app:layout_constraintStart_toEndOf="@+id/dev_B"
+        app:layout_constraintTop_toTopOf="@+id/dev_B" />
+
+    <TextView
+        android:id="@+id/test1"
+        android:layout_width="353dp"
+        android:layout_height="129dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="244dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+
+    <TextView
+        android:id="@+id/dev1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/dc"
+        app:layout_constraintStart_toStartOf="@+id/DevName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/setScheduleB"
+        android:layout_width="60pt"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:hint="@string/setScheduleB"
+        android:onClick="setSchedule"
+        app:layout_constraintStart_toStartOf="@+id/dev_B"
+        app:layout_constraintTop_toBottomOf="@+id/text_finish" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="51pt"
+        android:layout_height="48pt"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/erg_large" />
+
+    <EditText
+        android:id="@+id/interval"
+        android:layout_width="30pt"
+        android:layout_height="25pt"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="0"
+        android:textAlignment="center"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_interval"
+        app:layout_constraintStart_toEndOf="@+id/text_interval" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

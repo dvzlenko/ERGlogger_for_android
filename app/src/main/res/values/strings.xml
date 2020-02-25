@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">ERGlogger</string>
+    <string name="dc">Device connected:</string>
+    <string name="DevName">ERG-TP-99-9999</string>
+    <string name="dev_B">Device</string>
+    <string name="time_B">Time</string>
+    <string name="text_DCS">Data collecting schedule</string>
+    <string name="text_start">Start Date &amp; Time:</string>
+    <string name="text_finish">Finish Date &amp; Time:</string>
+    <string name="text_interval">Collecting interval (sec):</string>
+    <string name="setScheduleB">Set Schedule</string>
+    <string name="logo">ERG Research Group logo\\</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="warn">WARNING</string>
+    <string name="err">ERROR</string>
+    <string name="note">Note</string>
+    <string name="mcu">MCU unit</string>
+    <string name="adc">ADC unit</string>
+    <string name="mem">FLASH unit</string>
+    <string name="cal">Calibration Coefficients:</string>
+    <string name="sensor">Sensor unit</string>
+    <string name="setTime">Set Time</string>
+    <string name="setPRSCL">Set Prescaler</string>
+    <string name="dd">There is some data in the MEMORY</string>
+    <string name="download">Download</string>
+    <string name="advanced">Advanced</string>
+    <string name="name">File Name</string>
+    <string name="save_sch">Save Schedule</string>
+    <string name="load_sch">Load Schedule</string>
+</resources>

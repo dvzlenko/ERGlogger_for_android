@@ -1,0 +1,134 @@
+        // Find the STM32 VCP devices: 0x0483:0x5740 = 1155:22336
+        int vendorID, productID, tmp;
+        HashMap<String, UsbDevice> devices = null;
+        UsbDevice device = null;
+        UsbManager manager;
+        manager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        try {
+            devices = manager.getDeviceList();
+        }
+        catch (Exception exp) {
+            Global.EXTRA_ExpMsg = exp.getMessage();
+            Global.RiseError(1, this);
+            finish();
+        }
+
+        Iterator<UsbDevice> deviceIterator = devices.values().iterator();
+        if (deviceIterator.hasNext()) {
+            while (deviceIterator.hasNext()) {
+                UsbDevice dev = deviceIterator.next();
+                vendorID = dev.getVendorId();
+                productID = dev.getProductId();
+                if (vendorID == 1155 & productID == 22336) {
+                    device = dev;
+                }
+            }
+        }
+
+        // show the error message and quit
+        else {
+            Global.RiseError(1, this);
+            finish();
+            //Global.devinfo = "f 167321907 sadw wr es wd A AWEF".split(" ");
+            //if (Integer.valueOf(Global.devinfo[1]) == 167321907) {
+            //    Intent intent = new Intent(this, TActivity.class);
+            //    intent.putExtra(Global.EXTRA_DevInfo, Global.devinfo);
+            //    startActivity(intent);
+            //}
+        }
+
+        if (device != null) {
+            // open usb connection to the stm32 device
+            Global.connection = manager.openDevice(device);
+            // trying to claim the interface
+            if (!Global.connection.claimInterface(device.getInterface(0), true)) {
+                Global.RiseError(3, this);
+                finish();
+            }
+            // USB connection presets!!!
+            Global.connection.controlTransfer(0x21, 0x22, 0x1, 0, null, 0, 0);
+            // reset
+            //Global.connection.controlTransfer(0x40, 0, 0, 0, null, 0, 0);
+            // clear Rx
+            //connection.controlTransfer(0×40,0, 1, 0, null, 0, 0);
+            // clear Tx
+            //Global.connection.controlTransfer(0x40, 0, 2, 0, null, 0, 0);
+            // flow control none
+            //Global.connection.controlTransfer(0x40, 0x02, 0x0000, 0, null, 0, 0);
+            // baudrate
+            //* 0x2710 ----------------- 300
+            //* 0x1388 ----------------- 600
+            //* 0x09C4 ----------------- 1200
+            //* 0x04E2 ----------------- 2400
+            //* 0x0271 ----------------- 4800
+            //* 0x4138 ----------------- 9600
+            //* 0x809C ----------------- 19200
+            //* 0xC04E ----------------- 38400
+            //* 0x0034 ----------------- 57600
+            //* 0x001A ----------------- 115200
+            //* 0x000D ----------------- 230400
+            //* 0x4006 ----------------- 460800
+            //* 0x8003 ----------------- 921600
+            //Global.connection.controlTransfer(0x40, 0x03, 0x001A, 0, null, 0, 0);
+            // data bit 8, parity none, stop bit 1, tx off
+            //Global.connection.controlTransfer(0x40, 0x04, 0x0008, 0, null, 0, 0);
+
+            // Required EndPoints definition
+            int p,q;
+            UsbInterface IF;
+            UsbEndpoint EP;
+            // iterate over interfaces
+            for (p = 0; p < device.getInterfaceCount(); p++) {
+                IF = device.getInterface(p);
+                // find the interface class 0x0A - CDC-Data class
+                if (IF.getInterfaceClass() == USB_CLASS_CDC_DATA) {
+                    // iterate over endpoints
+                    for (q = 0; q < IF.getEndpointCount(); q++) {
+                        EP = IF.getEndpoint(q);
+                        // find the BULK EndPoints in the CDC-Data interface
+                        if (EP.getType() == USB_ENDPOINT_XFER_BULK) {
+                            if (EP.getDirection() == USB_DIR_OUT) {
+                                Global.USBoutEP = IF.getEndpoint(q);
+                            }
+                            if (EP.getDirection() == USB_DIR_IN) {
+                                Global.USBinEP = IF.getEndpoint(q);
+                            }
+                        }
+                    }
+                }
+            }
+            if (Global.USBinEP == null | Global.USBoutEP == null) {
+                Global.RiseError(2, this);
+                finish();
+            }
+
+            // initial hand-shake
+            Global.CDC_Send("hello\r\n");
+            //SystemClock.sleep(1000);
+            try {
+                Global.devinfo = Global.CDC_Get_String().split("\r\n");
+            }
+            catch (Exception exp) {
+                Global.EXTRA_ExpMsg = exp.getMessage();
+                Global.RiseError(4, this);
+                finish();
+            }
+
+            // if it is a real ERG-logger device
+            if (Integer.valueOf(Global.devinfo[1]) == 167321907) {
+                // run th eTActivity fro ERG-T loggers operation
+                if (Global.devinfo[2].contains("ERG-T-")) {
+                    Intent intent = new Intent(this, TActivity.class);
+                    intent.putExtra(Global.EXTRA_DevInfo, Global.devinfo);
+                    startActivity(intent);
+                }
+            }
+            //else if {
+            //    TODO: Here must be the TPActivity!!!
+            //}
+            else {
+                Global.RiseError(5, this);
+                finish();
+            }
+        }
+        finish();

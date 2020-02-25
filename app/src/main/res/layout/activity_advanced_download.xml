@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdvancedDownloadActivity">
+
+    <ImageView
+        android:id="@+id/logotime2"
+        android:layout_width="55pt"
+        android:layout_height="55pt"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_erglogo" />
+
+    <TextView
+        android:id="@+id/dev2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="@string/dc"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/devName2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/devName2"
+        android:layout_width="110pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/DevName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColorHint="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dev2" />
+
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/logotime2"
+        app:layout_constraintStart_toStartOf="@+id/devName2"
+        app:layout_constraintTop_toBottomOf="@+id/devName2" />
+
+    <TextView
+        android:id="@+id/first_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="First Sample Number"
+        app:layout_constraintStart_toStartOf="@+id/messageView"
+        app:layout_constraintTop_toBottomOf="@+id/messageView" />
+
+    <TextView
+        android:id="@+id/ammount_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Number of Samples"
+        app:layout_constraintStart_toStartOf="@+id/messageView"
+        app:layout_constraintTop_toBottomOf="@+id/first_message" />
+
+    <Button
+        android:id="@+id/ADWLD_OK_B"
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:onClick="onAdwDwnldClick"
+        android:text="@string/download"
+        app:layout_constraintEnd_toStartOf="@+id/ADWLD_CANCEL_B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ammount_message" />
+
+    <Button
+        android:id="@+id/ADWLD_CANCEL_B"
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:onClick="onAdwDwnldClick"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ADWLD_OK_B"
+        app:layout_constraintTop_toBottomOf="@+id/ammount_message" />
+
+    <EditText
+        android:id="@+id/first_grab"
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintBaseline_toBaselineOf="@+id/first_message"
+        app:layout_constraintStart_toEndOf="@+id/first_message" />
+
+    <EditText
+        android:id="@+id/volume_grab"
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ammount_message"
+        app:layout_constraintStart_toEndOf="@+id/first_message" />
+</androidx.constraintlayout.widget.ConstraintLayout>
