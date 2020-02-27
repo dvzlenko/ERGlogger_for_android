@@ -2,12 +2,14 @@ package com.ERG.erglogger;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -29,21 +31,23 @@ public class Global {
     public static boolean SaveFileFlag = false;
     public static boolean AdvancedDownloadFlag = false;
     public static boolean BasicDownloadFlag = true;
-    public static int Address = 0;
-    public static int Volume = 0;
     //
     public static String EXTRA_Message = "message";
     public static String EXTRA_Name = "ERG";
     public static String EXTRA_Flag = "flag";
     public static String[] devinfo;
     //public static String[] schedule;
+    public static Integer Address = 0;
+    public static Integer Volume = 0;
     public static Integer interval = 60;
     public static Integer dataCollected = 0;
     public static Calendar startTime = Calendar.getInstance();
     public static Calendar stopTime = Calendar.getInstance();
     public static UsbSerialPort port;
     public static int pagesize = 32*4096;
-    public static byte[] usb_rx_buffer = new byte[pagesize];
+    public static byte[] usb_rx_buffer = new byte[pagesize];        // global directory for ERG-files
+    public static File directory = new File(Environment.getExternalStorageDirectory()+"/ERG/");
+
 
     // rises the ErrorActivity with some stupid message
     public static void RiseError(Activity obj, Boolean exit) {
