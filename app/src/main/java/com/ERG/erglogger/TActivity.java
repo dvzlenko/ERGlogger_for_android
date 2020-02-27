@@ -40,8 +40,6 @@ import java.util.Locale;
 public class TActivity extends AppCompatActivity {
     private static final int CREATE_SCHEDULE_FILE_CODE = 12;
     private static final int OPEN_SCHEDULE_FILE_CODE = 21;
-    // global directory for ERG-files
-    File directory = new File(Environment.getExternalStorageDirectory()+"/ERG/");
     // some global text-view
     TextView textView;
     // schedule pickers
@@ -60,9 +58,10 @@ public class TActivity extends AppCompatActivity {
         final Activity obj = this;
         detachReceiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
-                if(intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED))
+                if(intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
                     Global.EXTRA_Message = "ERG logger was detached!\nSorry, the application must be closed!!!";
-                Global.RiseError(obj, true);
+                    Global.RiseError(obj, true);
+                }
             }
         };
         IntentFilter filter = new IntentFilter();
@@ -94,8 +93,6 @@ public class TActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // get the permissions
-        getAccess();
         // schedule basic part
         getSchedule();
         refreshSchedule();
@@ -138,7 +135,6 @@ public class TActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, resultData);
         if (requestCode == CREATE_SCHEDULE_FILE_CODE && resultCode == Activity.RESULT_OK) {
             // get the schedule
-            grabSchedule();
             Log.i("schedule", Global.startTime.getTimeInMillis()+" "+Global.stopTime.getTimeInMillis()+" "+Global.interval);
             String schedule = String.format("%d\n%d\n%d\n", Global.startTime.getTimeInMillis(), Global.stopTime.getTimeInMillis(), Global.interval);
             Uri uri = null;
@@ -390,29 +386,6 @@ public class TActivity extends AppCompatActivity {
         finish();
     }
 
-    public void getAccess() {
-        //Getting the permission status
-        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED)
-            Log.i("permission", "GRANTED");
-        else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            Log.i("permission", "DENIED");
-            return;
-        }
-        // creating a directory for files storing
-        if (!directory.exists()) {
-            boolean success = directory.mkdirs();
-            if (!success) {
-                Global.EXTRA_Message = "The directory for file storage was not created :(";
-                Global.RiseError(this, false);
-            }
-            Log.i("directory", "CREATED");
-        }
-        else
-            Log.i("directory", "EXISTS");
-    }
-
     public void onDownloadClick(View view) {
         // define the amount of the data to download
         if (view.getId() == findViewById(R.id.dataAB).getId()) {
@@ -444,8 +417,8 @@ public class TActivity extends AppCompatActivity {
     }
 
     public void dataDownload() {
-        final File tempFile = new File(directory, Global.EXTRA_Name);
-        final File voltFile = new File(directory, "VOLTAGE-"+Global.EXTRA_Name);
+        final File tempFile = new File(Global.directory, Global.EXTRA_Name);
+        final File voltFile = new File(Global.directory, "VOLTAGE-"+Global.EXTRA_Name);
         // kick up a user not to overwrite
         if (tempFile.exists() | voltFile.exists()) {
             Global.EXTRA_Message =
@@ -464,7 +437,7 @@ public class TActivity extends AppCompatActivity {
         catch (IOException exp) {
             exp.printStackTrace();
             Global.EXTRA_Message = "The log-files cannot be created:\n" + exp + "\n\n" +
-                    "Did you granted the storage access permission???";
+                    "Did you granted the storage access permission to ERGlogger application???";
             Global.RiseError(this, false);
             return;
         }
@@ -593,11 +566,14 @@ public class TActivity extends AppCompatActivity {
 
     public void onScheduleClick(View view) {
         if (view.getId() == R.id.saveScheduleB) {
+            grabSchedule();
             Intent intent = new Intent("android.intent.action.CREATE_DOCUMENT");
             ((Intent) intent).addCategory("android.intent.category.OPENABLE");
             ((Intent) intent).setType("text/plain");
             // create default file-name
-            String suggestedName = "ERG-logger-01.schedule.txt";
+            String suggestedName = String.format("ERG_schedule-%04d.%02d.%02d-%02d:%02d-%04d.%02d.%02d-%02d:%02d.txt",
+                    Global.startTime.YEAR, Global.startTime.MONTH+1, Global.startTime.DAY_OF_MONTH,Global.startTime.HOUR_OF_DAY, Global.startTime.MINUTE,
+                    Global.stopTime.YEAR, Global.stopTime.MONTH+1, Global.stopTime.DAY_OF_MONTH,Global.stopTime.HOUR_OF_DAY, Global.stopTime.MINUTE);
             intent.putExtra(Intent.EXTRA_TITLE, suggestedName);
             startActivityForResult(intent, CREATE_SCHEDULE_FILE_CODE);
         }
