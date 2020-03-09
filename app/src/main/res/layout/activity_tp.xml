@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +8,7 @@
     tools:context=".TActivity">
 
     <DatePicker
-        android:id="@+id/startDate"
+        android:id="@+id/T_StartDatePicker"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:calendarViewShown="false"
@@ -16,10 +17,10 @@
         android:scaleY=".8"
         android:theme="@style/NumberPickerStyle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_start" />
+        app:layout_constraintTop_toTopOf="@+id/T_SchStartW" />
 
     <DatePicker
-        android:id="@+id/stopDate"
+        android:id="@+id/T_StopDatePicker"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:calendarViewShown="false"
@@ -28,10 +29,10 @@
         android:scaleY=".8"
         android:theme="@style/NumberPickerStyle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_finish" />
+        app:layout_constraintTop_toTopOf="@+id/T_SchFinishW" />
 
     <TimePicker
-        android:id="@+id/startTime"
+        android:id="@+id/T_StartTimePicker"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginStart="200dp"
@@ -41,10 +42,10 @@
         android:theme="@style/NumberPickerStyle"
         android:timePickerMode="spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/startDate" />
+        app:layout_constraintTop_toTopOf="@+id/T_StartDatePicker" />
 
     <TimePicker
-        android:id="@+id/stopTime"
+        android:id="@+id/T_StopTimePicker"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginStart="200dp"
@@ -54,10 +55,10 @@
         android:theme="@style/NumberPickerStyle"
         android:timePickerMode="spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/stopDate" />
+        app:layout_constraintTop_toTopOf="@+id/T_StopDatePicker" />
 
     <TextView
-        android:id="@+id/DevName"
+        android:id="@+id/T_DevNameW"
         android:layout_width="110pt"
         android:layout_height="20pt"
         android:layout_marginStart="20dp"
@@ -67,10 +68,10 @@
         android:hint="@string/DevName"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev1" />
+        app:layout_constraintTop_toBottomOf="@+id/T_DevConW" />
 
     <TextView
-        android:id="@+id/text_DCS"
+        android:id="@+id/T_DataCSW"
         android:layout_width="90pt"
         android:layout_height="10pt"
         android:layout_marginStart="20dp"
@@ -81,10 +82,10 @@
         android:hint="@string/text_DCS"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev_B" />
+        app:layout_constraintTop_toBottomOf="@+id/T_DevB" />
 
     <TextView
-        android:id="@+id/text_start"
+        android:id="@+id/T_SchStartW"
         android:layout_width="90pt"
         android:layout_height="20pt"
         android:layout_marginStart="20dp"
@@ -94,10 +95,10 @@
         android:hint="@string/text_start"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+        app:layout_constraintTop_toBottomOf="@+id/T_DataCSW" />
 
     <TextView
-        android:id="@+id/text_finish"
+        android:id="@+id/T_SchFinishW"
         android:layout_width="90pt"
         android:layout_height="20pt"
         android:layout_marginStart="20dp"
@@ -108,10 +109,10 @@
         android:hint="@string/text_finish"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+        app:layout_constraintTop_toBottomOf="@+id/T_DataCSW" />
 
     <TextView
-        android:id="@+id/text_interval"
+        android:id="@+id/T_SchIntW"
         android:layout_width="wrap_content"
         android:layout_height="20pt"
         android:layout_marginStart="20dp"
@@ -122,25 +123,25 @@
         android:hint="@string/text_interval"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+        app:layout_constraintTop_toBottomOf="@+id/T_DataCSW" />
 
     <Button
-        android:id="@+id/dev_B"
+        android:id="@+id/T_DevB"
         android:layout_width="40pt"
         android:layout_height="20pt"
         android:layout_marginStart="15dp"
         android:hint="@string/dev_B"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DevName" />
+        app:layout_constraintTop_toBottomOf="@+id/T_DevNameW" />
 
     <Button
-        android:id="@+id/time_B"
+        android:id="@+id/T_TimeB"
         android:layout_width="40pt"
         android:layout_height="20pt"
         android:layout_marginStart="10dp"
         android:hint="@string/time_B"
-        app:layout_constraintStart_toEndOf="@+id/dev_B"
-        app:layout_constraintTop_toTopOf="@+id/dev_B" />
+        app:layout_constraintStart_toEndOf="@+id/T_DevB"
+        app:layout_constraintTop_toTopOf="@+id/T_DevB" />
 
     <TextView
         android:id="@+id/test1"
@@ -150,26 +151,26 @@
         android:layout_marginTop="244dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startDate" />
+        app:layout_constraintTop_toBottomOf="@+id/T_StartDatePicker" />
 
     <TextView
-        android:id="@+id/dev1"
+        android:id="@+id/Time_DevConW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/dc"
-        app:layout_constraintStart_toStartOf="@+id/DevName"
+        app:layout_constraintStart_toStartOf="@+id/T_DevNameW"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/setScheduleB"
+        android:id="@+id/T_SetScheduleB"
         android:layout_width="60pt"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
         android:hint="@string/setScheduleB"
         android:onClick="setSchedule"
-        app:layout_constraintStart_toStartOf="@+id/dev_B"
-        app:layout_constraintTop_toBottomOf="@+id/text_finish" />
+        app:layout_constraintStart_toStartOf="@+id/T_DevB"
+        app:layout_constraintTop_toBottomOf="@+id/T_SchFinishW" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -183,14 +184,14 @@
         app:srcCompat="@drawable/erg_large" />
 
     <EditText
-        android:id="@+id/interval"
+        android:id="@+id/T_DataIntValue"
         android:layout_width="30pt"
         android:layout_height="25pt"
         android:ems="10"
         android:inputType="numberDecimal"
         android:text="0"
         android:textAlignment="center"
-        app:layout_constraintBaseline_toBaselineOf="@+id/text_interval"
-        app:layout_constraintStart_toEndOf="@+id/text_interval" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/T_SchIntW"
+        app:layout_constraintStart_toEndOf="@+id/T_SchIntW" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

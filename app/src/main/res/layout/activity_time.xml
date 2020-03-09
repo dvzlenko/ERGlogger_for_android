@@ -1,230 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TimeActivity">
 
-    <TextView
-        android:id="@+id/time11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctime" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/ctime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/devtime" />
+        <TextView
+            android:id="@+id/Time_DevConW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/dc"
+            android:textColorHint="@color/colorPrimary" />
 
-    <TextView
-        android:id="@+id/prscl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setTimeB" />
+        <TextView
+            android:id="@+id/Time_DevNameW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_DevConW"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/DevName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/time21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time11" />
+        <ImageView
+            android:id="@+id/Time_LogoP"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/Time_DevNameW"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="ERG Research Rgoup logo"
+            app:srcCompat="@drawable/ic_erglogo" />
 
-    <TextView
-        android:id="@+id/time31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time21" />
 
-    <TextView
-        android:id="@+id/timeset1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="18dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time31" />
+        <TextView
+            android:id="@+id/Time_CurTimeW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_DevNameW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:text="Current date &amp; time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/prscl1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prscl" />
+        <TextView
+            android:id="@+id/Time_HostTimeW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_CurTimeW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
+            android:text="Host device:"/>
 
-    <TextView
-        android:id="@+id/prscl3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prscl1" />
+        <TextView
+            android:id="@+id/Time_HostTimeV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_CurTimeW"
+            android:layout_alignStart="@+id/Time_UncorTimeV"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="18dp"
+            android:text="Some Date and Time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/time12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBaseline_toBaselineOf="@+id/time11"
-        app:layout_constraintStart_toStartOf="@+id/time22" />
+        <TextView
+            android:id="@+id/Time_UncorTimeW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_HostTimeW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:text="ERG uncorrected:" />
 
-    <TextView
-        android:id="@+id/time22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintBaseline_toBaselineOf="@+id/time21"
-        app:layout_constraintStart_toEndOf="@+id/time21" />
+        <TextView
+            android:id="@+id/Time_UncorTimeV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_HostTimeV"
+            android:layout_toEndOf="@id/Time_UncorTimeW"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="12dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="Some Date and Time"/>
 
-    <TextView
-        android:id="@+id/time32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/holo_green_dark"
-        app:layout_constraintBaseline_toBaselineOf="@+id/time31"
-        app:layout_constraintStart_toStartOf="@+id/time22" />
+        <TextView
+            android:id="@+id/Time_CorrTimeW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_UncorTimeW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
+            android:text="ERG corrected:" />
 
-    <TextView
-        android:id="@+id/timeset2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBaseline_toBaselineOf="@+id/timeset1"
-        app:layout_constraintStart_toStartOf="@+id/time22" />
+        <TextView
+            android:id="@+id/Time_CorrTimeV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_UncorTimeV"
+            android:layout_alignStart="@id/Time_UncorTimeV"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/holo_green_dark"
+            android:text="Some Date and Time"/>
 
-    <TextView
-        android:id="@+id/prscl2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBaseline_toBaselineOf="@+id/prscl1"
-        app:layout_constraintStart_toStartOf="@+id/prscl4" />
+        <TextView
+            android:id="@+id/Time_TimeSetW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_CorrTimeW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
+            android:text="Time was set at:" />
 
-    <TextView
-        android:id="@+id/prscl4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBaseline_toBaselineOf="@+id/prscl3"
-        app:layout_constraintStart_toEndOf="@+id/prscl3" />
+        <TextView
+            android:id="@+id/Time_TimeSetV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_CorrTimeW"
+            android:layout_alignStart="@+id/Time_UncorTimeV"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="36dp"
+            android:text="Some Date and Time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/darker_gray" />
 
-    <ImageView
-        android:id="@+id/logotime"
-        android:layout_width="55pt"
-        android:layout_height="55pt"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_erglogo" />
+        <Button
+            android:id="@+id/Time_SetTimeB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_TimeSetW"
+            android:layout_alignStart="@+id/Time_SetPrsclB"
+            android:layout_alignEnd="@+id/Time_SetPrsclB"
+            android:layout_marginTop="16dp"
+            android:hint="@string/setTime"
+            android:onClick="onSetTimeClick"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/devtime"
-        android:layout_width="110pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="20dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/DevName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev1" />
+        <TextView
+            android:id="@+id/Time_PrsclW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_SetTimeB"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black"
+            android:text="Time Prescaler Values" />
 
-    <TextView
-        android:id="@+id/dev1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/dc"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Time_PrsclCurrentW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_PrsclW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
+            android:text="Current:" />
 
-    <Button
-        android:id="@+id/setTimeB"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/setTime"
-        android:onClick="onSetTimeClick"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintEnd_toEndOf="@+id/setPrsclB"
-        app:layout_constraintStart_toStartOf="@+id/setPrsclB"
-        app:layout_constraintTop_toBottomOf="@+id/timeset1" />
+        <TextView
+            android:id="@+id/Time_PrsclCurrentV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_PrsclW"
+            android:layout_alignStart="@+id/Time_UncorTimeV"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="12dp"
+            android:text="Some prescaler"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/setPrsclB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/setPRSCL"
-        android:onClick="onSetPrsclClick"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prscl3" />
+        <TextView
+            android:id="@+id/Time_PrsclRecommendedW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_PrsclCurrentW"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/black"
+            android:text="Recommended:" />
 
-    <Button
-        android:id="@+id/timeCancelB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:hint="@string/cancel"
-        android:onClick="onCancelClick"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toEndOf="@+id/setPrsclB"
-        app:layout_constraintTop_toTopOf="@+id/setPrsclB" />
+        <TextView
+            android:id="@+id/Time_PrsclRecommendedV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_PrsclCurrentW"
+            android:layout_alignStart="@+id/Time_UncorTimeV"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="12dp"
+            android:text="Some prescaler"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@android:color/darker_gray" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/Time_SetPrsclB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_PrsclRecommendedW"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/setPRSCL"
+            android:onClick="onSetPrsclClick"
+            android:textColorHint="@android:color/black" />
+
+        <Button
+            android:id="@+id/Time_CancelB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Time_PrsclRecommendedW"
+            android:layout_toEndOf="@id/Time_SetPrsclB"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/cancel"
+            android:onClick="onCancelClick"
+            android:textColorHint="@android:color/black" />
+
+
+
+    </RelativeLayout>
+</ScrollView>

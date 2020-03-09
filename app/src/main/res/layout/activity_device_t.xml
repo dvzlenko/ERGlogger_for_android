@@ -1,208 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DeviceTActivity">
 
-    <TextView
-        android:id="@+id/time11"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
-        android:hint="@string/mcu"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/devtime" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/r1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cal" />
+        <TextView
+            android:id="@+id/DT_DevConW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/dc"
+            android:textColorHint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/r2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a1" />
+        <TextView
+            android:id="@+id/DT_DevNameW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/DT_DevConW"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/DevName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/r3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a2" />
+        <ImageView
+            android:id="@+id/DT_LogoP"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/DT_DevNameW"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:contentDescription="ERG Research Rgoup logo"
+            app:srcCompat="@drawable/ic_erglogo" />
 
-    <TextView
-        android:id="@+id/a1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r1" />
+        <TextView
+            android:id="@+id/DT_info11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/DT_LogoP"
+            android:hint="@string/mcu"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/a2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r2" />
+        <TextView
+            android:id="@+id/DT_info12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/DT_LogoP"
+            android:layout_toEndOf="@id/DT_info31"
+            android:text="SOME UNIT"/>
 
-    <TextView
-        android:id="@+id/a3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/r3" />
+        <TextView
+            android:id="@+id/DT_info21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DT_info11"
+            android:hint="@string/adc"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/time12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/time11" />
+        <TextView
+            android:id="@+id/DT_info22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DT_info12"
+            android:layout_toEndOf="@id/DT_info31"
+            android:text="SOME ADC"/>
 
-    <TextView
-        android:id="@+id/info22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info21" />
+        <TextView
+            android:id="@+id/DT_info31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DT_info21"
+            android:hint="@string/mem"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/info32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info31" />
+        <TextView
+            android:id="@+id/DT_info32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DT_info22"
+            android:layout_toEndOf="@id/DT_info31"
+            android:text="SOME FLASH" />
 
-    <TextView
-        android:id="@+id/info42"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info41" />
+        <TextView
+            android:id="@+id/DT_info41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DT_info31"
+            android:hint="@string/sensor"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/info21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/adc"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time11" />
+        <TextView
+            android:id="@+id/DT_info42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DT_info32"
+            android:layout_toEndOf="@id/DT_info31"
+            android:text="SOME SENSOR" />
 
-    <TextView
-        android:id="@+id/info31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/mem"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info21" />
+        <TextView
+            android:id="@+id/DT_CalCoefW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/DT_info41"
+            android:hint="@string/cal"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/info41"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/sensor"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info31" />
+        <TextView
+            android:id="@+id/DT_r1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:text="r1 = 1000.0"
+            android:layout_below="@+id/DT_CalCoefW" />
 
-    <TextView
-        android:id="@+id/cal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/cal"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info41" />
+        <TextView
+            android:id="@+id/DT_a1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="A1 = WWW, A2 = WWW, A3 = WWW"
+            android:layout_below="@+id/DT_r1" />
 
-    <ImageView
-        android:id="@+id/logotime"
-        android:layout_width="55pt"
-        android:layout_height="55pt"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_erglogo" />
+        <TextView
+            android:id="@+id/DT_r2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:text="r2 = 1000"
+            android:layout_below="@+id/DT_a1"/>
 
-    <TextView
-        android:id="@+id/devtime"
-        android:layout_width="110pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="20dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/DevName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev1" />
+        <TextView
+            android:id="@+id/DT_a2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="A1 = WWW, A2 = WWW, A3 = WWW"
+            android:layout_below="@+id/DT_r2" />
 
-    <TextView
-        android:id="@+id/dev1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/dc"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/DT_r3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:text="r3 = 1000"
+            android:layout_below="@+id/DT_a2" />
 
-    <Button
-        android:id="@+id/closedev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="@string/cancel"
-        android:onClick="onButtonClick"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a3" />
+        <TextView
+            android:id="@+id/DT_a3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="A1 = WWW, A2 = WWW, A3 = WWW"
+            android:layout_below="@+id/DT_r3" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/DT_CloseB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/DT_a3"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/cancel"
+            android:onClick="onButtonClick"
+            android:textColorHint="@android:color/black" />
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,310 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TActivity">
 
-    <TextView
-        android:id="@+id/tdownloading"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Downloading..."
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TcircularBar" />
+        android:layout_height="wrap_content">
 
-    <DatePicker
-        android:id="@+id/startDate"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:scaleX=".8"
-        android:scaleY=".8"
-        android:theme="@style/NumberPickerStyle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_start" />
+        <TextView
+            android:id="@+id/T_DevConW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/dc"
+            android:textColorHint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <DatePicker
-        android:id="@+id/stopDate"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:scaleX=".8"
-        android:scaleY=".8"
-        android:theme="@style/NumberPickerStyle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_finish" />
+        <TextView
+            android:id="@+id/T_DevNameW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/T_DevConW"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/DevName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColorHint="@android:color/black" />
 
-    <TimePicker
-        android:id="@+id/startTime"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginStart="200dp"
-        android:headerBackground="#0f0f0f00"
-        android:scaleX=".8"
-        android:scaleY=".8"
-        android:theme="@style/NumberPickerStyle"
-        android:timePickerMode="spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/startDate" />
+        <ImageView
+            android:id="@+id/T_LogoP"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/T_DevNameW"
+            android:adjustViewBounds="true"
+            android:contentDescription="ERG Research Rgoup logo"
+            app:srcCompat="@drawable/ic_erglogo" />
 
-    <TimePicker
-        android:id="@+id/stopTime"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginStart="200dp"
-        android:headerBackground="#0f0f0f00"
-        android:scaleX=".8"
-        android:scaleY=".8"
-        android:theme="@style/NumberPickerStyle"
-        android:timePickerMode="spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/stopDate" />
+        <Button
+            android:id="@+id/T_DevB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/T_DevNameW"
+            android:layout_alignStart="@+id/T_SetScheduleB"
+            android:layout_alignEnd="@+id/T_SetScheduleB"
+            android:hint="@string/dev_B"
+            android:onClick="onDeviceClick"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/DevName"
-        android:layout_width="110pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="20dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/DevName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev1" />
+        <Button
+            android:id="@+id/T_TimeB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/T_DevNameW"
+            android:layout_alignStart="@+id/T_SaveScheduleB"
+            android:layout_alignEnd="@+id/T_SaveScheduleB"
+            android:hint="@string/time_B"
+            android:onClick="onTimeClick"
+            android:textColorHint="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/T_DevB"
+            app:layout_constraintTop_toTopOf="@+id/T_DevB" />
 
-    <TextView
-        android:id="@+id/text_DCS"
-        android:layout_width="90pt"
-        android:layout_height="10pt"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/text_DCS"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dev_B" />
+        <TextView
+            android:id="@+id/T_DataCSW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_DevB"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/text_DCS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/text_DD"
-        android:layout_width="150pt"
-        android:layout_height="10pt"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/dd"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setScheduleB" />
+        <TextView
+            android:id="@+id/T_SchStartW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_DataCSW"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/text_start"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColorHint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/text_start"
-        android:layout_width="90pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="20dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="center|start"
-        android:hint="@string/text_start"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+        <DatePicker
+            android:id="@+id/T_StartDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/T_SchStartW"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="-20dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:theme="@style/NumberPickerStyle" />
 
-    <TextView
-        android:id="@+id/text_finish"
-        android:layout_width="90pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="115dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="center|start"
-        android:hint="@string/text_finish"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+        <TimePicker
+            android:id="@+id/T_StartTimePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/T_SchStartW"
+            android:layout_marginStart="-50dp"
+            android:layout_marginTop="-20dp"
+            android:layout_toEndOf="@id/T_StartDatePicker"
+            android:headerBackground="#0f0f0f00"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:theme="@style/NumberPickerStyle"
+            android:timePickerMode="spinner" />
 
-    <TextView
-        android:id="@+id/text_interval"
-        android:layout_width="wrap_content"
-        android:layout_height="20pt"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="230dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="center|start"
-        android:hint="@string/text_interval"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_DCS" />
+        <TextView
+            android:id="@+id/T_SchFinishW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_StartDatePicker"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/text_finish"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColorHint="@android:color/black" />
 
-    <Button
-        android:id="@+id/dev_B"
-        android:layout_width="50pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="15dp"
-        android:hint="@string/dev_B"
-        android:onClick="onDeviceClick"
-        android:textColor="@android:color/background_dark"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DevName" />
+        <DatePicker
+            android:id="@+id/T_StopDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/T_SchFinishW"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="-20dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:theme="@style/NumberPickerStyle" />
 
-    <Button
-        android:id="@+id/time_B"
-        android:layout_width="50pt"
-        android:layout_height="20pt"
-        android:layout_marginStart="8dp"
-        android:hint="@string/time_B"
-        android:onClick="onTimeClick"
-        android:textColorHint="@android:color/black"
-        app:layout_constraintStart_toEndOf="@+id/dev_B"
-        app:layout_constraintTop_toTopOf="@+id/dev_B" />
+        <TimePicker
+            android:id="@+id/T_StopTimePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/T_SchFinishW"
+            android:layout_marginStart="-50dp"
+            android:layout_marginTop="-20dp"
+            android:layout_toEndOf="@id/T_StopDatePicker"
+            android:headerBackground="#0f0f0f00"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:theme="@style/NumberPickerStyle"
+            android:timePickerMode="spinner" />
 
-    <TextView
-        android:id="@+id/dev1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="@string/dc"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="@+id/DevName"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/T_SchIntW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_StopDatePicker"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/text_interval"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColorHint="@android:color/black" />
 
-    <Button
-        android:id="@+id/setScheduleB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:hint="@string/setScheduleB"
-        android:onClick="setSchedule"
-        android:textColorHint="@android:color/background_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/dev_B"
-        app:layout_constraintTop_toBottomOf="@+id/text_interval" />
+        <EditText
+            android:id="@+id/T_DataIntValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_StopDatePicker"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-12dp"
+            android:layout_toEndOf="@id/T_SchIntW"
+            android:inputType="numberDecimal"
+            android:text="0"
+            android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/saveScheduleB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:hint="@string/save_sch"
-        android:onClick="onScheduleClick"
-        android:textColorHint="@android:color/background_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/setScheduleB"
-        app:layout_constraintTop_toBottomOf="@+id/text_interval" />
+        <Button
+            android:id="@+id/T_SetScheduleB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_SchIntW"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/setScheduleB"
+            android:onClick="setSchedule"
+            android:textColorHint="@android:color/background_dark"
+            android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/loadScheduleB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:hint="@string/load_sch"
-        android:onClick="onScheduleClick"
-        android:textColorHint="@android:color/background_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/saveScheduleB"
-        app:layout_constraintTop_toBottomOf="@+id/text_interval" />
+        <Button
+            android:id="@+id/T_SaveScheduleB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_SchIntW"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@id/T_SetScheduleB"
+            android:hint="@string/save_sch"
+            android:onClick="onScheduleClick"
+            android:textColorHint="@android:color/background_dark"
+            android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/dataBB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="@string/download"
-        android:onClick="onDownloadClick"
-        android:textColorHint="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/setScheduleB"
-        app:layout_constraintTop_toBottomOf="@+id/text_DD" />
+        <Button
+            android:id="@+id/T_LoadScheduleB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_SchIntW"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@id/T_SaveScheduleB"
+            android:hint="@string/load_sch"
+            android:onClick="onScheduleClick"
+            android:textColorHint="@android:color/background_dark"
+            android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/dataAB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:hint="@string/advanced"
-        android:onClick="onDownloadClick"
-        android:textColorHint="@android:color/background_dark"
-        app:layout_constraintStart_toEndOf="@+id/dataBB"
-        app:layout_constraintTop_toBottomOf="@+id/text_DD" />
+        <TextView
+            android:id="@+id/T_DataCollectedW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_SetScheduleB"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/dd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColorHint="@android:color/black" />
 
-    <Button
-        android:id="@+id/TAcancelB"
-        android:layout_width="50pt"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:hint="@string/cancel"
-        android:onClick="onCancelClick"
-        android:textColorHint="@android:color/background_dark"
-        app:layout_constraintStart_toEndOf="@+id/dataAB"
-        app:layout_constraintTop_toBottomOf="@+id/text_DD" />
+        <Button
+            android:id="@+id/T_DataBDownlodB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_DataCollectedW"
+            android:layout_alignStart="@+id/T_SetScheduleB"
+            android:layout_alignEnd="@+id/T_SetScheduleB"
+            android:layout_marginTop="12dp"
+            android:hint="@string/download"
+            android:onClick="onDownloadClick"
+            android:textColorHint="@android:color/background_dark" />
 
-    <EditText
-        android:id="@+id/interval"
-        android:layout_width="30pt"
-        android:layout_height="25pt"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="0"
-        android:textAlignment="center"
-        app:layout_constraintBaseline_toBaselineOf="@+id/text_interval"
-        app:layout_constraintStart_toEndOf="@+id/text_interval" />
+        <Button
+            android:id="@+id/T_DataADownlodB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_DataCollectedW"
+            android:layout_alignStart="@+id/T_SaveScheduleB"
+            android:layout_alignEnd="@+id/T_SaveScheduleB"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/T_DataBDownlodB"
+            android:hint="@string/advanced"
+            android:onClick="onDownloadClick"
+            android:textColorHint="@android:color/background_dark" />
 
-    <ImageView
-        android:id="@+id/logotime"
-        android:layout_width="55pt"
-        android:layout_height="55pt"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_erglogo" />
+        <Button
+            android:id="@+id/T_CancelB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/T_DataCollectedW"
+            android:layout_alignStart="@+id/T_LoadScheduleB"
+            android:layout_alignEnd="@+id/T_LoadScheduleB"
+            android:layout_marginTop="12dp"
+            android:hint="@string/cancel"
+            android:onClick="onCancelClick"
+            android:textColorHint="@android:color/background_dark" />
 
-    <ProgressBar
-        android:id="@+id/TcircularBar"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/T_DownloadingW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/T_CircularBar"
+            android:layout_centerInParent="true"
+            android:text="Downloading..."
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@android:color/black" />
 
-    <ProgressBar
-        android:id="@+id/TlinearBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/T_CircularBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/T_SchStartW"
+            android:layout_centerInParent="true"
+            android:indeterminate="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/T_LinearBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/T_DownloadingW"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="top"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0" />
+
+    </RelativeLayout>
+
+</ScrollView>
