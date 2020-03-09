@@ -26,11 +26,11 @@ public class TPActivity extends AppCompatActivity {
         // Device name
         String devname = Global.devinfo[2].replace(" ","")+"-"+Global.devinfo[3].replace(" ", "");
         TextView textView;
-        textView = findViewById(R.id.DevName);
+        textView = findViewById(R.id.T_DevNameW);
         textView.setText(devname);
         // get the schedule
         getSchedule();
-        textView = findViewById(R.id.interval);
+        textView = findViewById(R.id.T_DataIntValue);
         textView.setText(String.valueOf(interval));
         //text = findViewById(R.id.test1);
         //text.setText(String.valueOf(Global.ReReadFlag));
@@ -38,16 +38,16 @@ public class TPActivity extends AppCompatActivity {
 
     public void setSchedule(View view) {
         // collecting new schedule
-        DatePicker startDatePicker = findViewById(R.id.startDate);
-        DatePicker stopDatePicker = findViewById(R.id.stopDate);
-        TimePicker startTimePicker = findViewById(R.id.startTime);
-        TimePicker stopTimePicker = findViewById(R.id.stopTime);
+        DatePicker startDatePicker = findViewById(R.id.T_StartDatePicker);
+        DatePicker stopDatePicker = findViewById(R.id.T_StopDatePicker);
+        TimePicker startTimePicker = findViewById(R.id.T_StartTimePicker);
+        TimePicker stopTimePicker = findViewById(R.id.T_StopTimePicker);
         String startDate = String.format(Locale.US, "%4d.%2d.%2d", startDatePicker.getYear(), startDatePicker.getMonth() + 1, startDatePicker.getDayOfMonth()).replace(" ", "0");
         String stopDate = String.format(Locale.US, "%4d.%2d.%2d", stopDatePicker.getYear(), stopDatePicker.getMonth() + 1, stopDatePicker.getDayOfMonth()).replace(" ", "0");
         String startTime = String.format(Locale.US, "%2d:%2d:00", startTimePicker.getCurrentHour(), startTimePicker.getCurrentMinute()).replace(" ", "0");
         String stopTime = String.format(Locale.US, "%2d:%2d:00", stopTimePicker.getCurrentHour(), stopTimePicker.getCurrentMinute()).replace(" ", "0");
         // collecting interval
-        TextView textView = findViewById(R.id.interval);
+        TextView textView = findViewById(R.id.T_DataIntValue);
         interval = Integer.parseInt(textView.getText().toString());
         // set globals
         Global.startTime.set(startDatePicker.getYear(), startDatePicker.getMonth(), startDatePicker.getDayOfMonth(), startTimePicker.getCurrentHour(), startTimePicker.getCurrentMinute(), 0);
@@ -65,17 +65,17 @@ public class TPActivity extends AppCompatActivity {
         //interval = Integer.parseInt(Global.schedule[4]);
         // start time
         //Global.startTime.setTimeInMillis(Long.parseLong(Global.schedule[2])*1000);
-        DatePicker startDatePicker = findViewById(R.id.startDate);
+        DatePicker startDatePicker = findViewById(R.id.T_StartDatePicker);
         startDatePicker.updateDate(Global.startTime.get(Calendar.YEAR), Global.startTime.get(Calendar.MONTH), Global.startTime.get(Calendar.DAY_OF_MONTH));
-        TimePicker startTimePicker = findViewById(R.id.startTime);
+        TimePicker startTimePicker = findViewById(R.id.T_StartTimePicker);
         startTimePicker.setIs24HourView(Boolean.TRUE);
         startTimePicker.setCurrentHour(Global.startTime.get(Calendar.HOUR_OF_DAY));
         startTimePicker.setCurrentMinute(Global.startTime.get(Calendar.MINUTE));
         // stop time
         //Global.stopTime.setTimeInMillis(Long.parseLong(Global.schedule[3])*1000);
-        DatePicker stopDatePicker = findViewById(R.id.stopDate);
+        DatePicker stopDatePicker = findViewById(R.id.T_StopDatePicker);
         stopDatePicker.updateDate(Global.stopTime.get(Calendar.YEAR), Global.stopTime.get(Calendar.MONTH), Global.stopTime.get(Calendar.DAY_OF_MONTH));
-        TimePicker stopTimePicker = findViewById(R.id.stopTime);
+        TimePicker stopTimePicker = findViewById(R.id.T_StopTimePicker);
         stopTimePicker.setIs24HourView(Boolean.TRUE);
         stopTimePicker.setCurrentHour(Global.stopTime.get(Calendar.HOUR_OF_DAY));
         stopTimePicker.setCurrentMinute(Global.stopTime.get(Calendar.MINUTE));

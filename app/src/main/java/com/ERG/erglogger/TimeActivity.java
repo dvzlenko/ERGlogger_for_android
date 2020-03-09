@@ -37,50 +37,17 @@ public class TimeActivity extends AppCompatActivity {
         TextView textView;
 
         // device
-        textView = findViewById(R.id.devtime);
+        textView = findViewById(R.id.Time_DevNameW);
         string = Global.devinfo[2].replace(" ","")+"-"+Global.devinfo[3].replace(" ", "");
         textView.setText(string);
 
-        // main text fields
-        string = "Current date & time";
-        textView = findViewById(R.id.ctime);
-        textView.setText(string);
-
-        string = "Host device:";
-        textView = findViewById(R.id.time11);
-        textView.setText(string);
-
-        string = "ERG uncorrected:";
-        textView = findViewById(R.id.time21);
-        textView.setText(string);
-
-        string = "ERG corrected:";
-        textView = findViewById(R.id.time31);
-        textView.setText(string);
-
-        string = "Time was set:";
-        textView = findViewById(R.id.timeset1);
-        textView.setText(string);
-
-        string = "Time prescaler values";
-        textView = findViewById(R.id.prscl);
-        textView.setText(string);
-
-        string = "Current:";
-        textView = findViewById(R.id.prscl1);
-        textView.setText(string);
-
-        string = "Recommended:";
-        textView = findViewById(R.id.prscl3);
-        textView.setText(string);
-
         // fields for live thread
-        hostTimeField = findViewById(R.id.time12);
-        ergUField = findViewById(R.id.time22);
-        ergCField = findViewById(R.id.time32);
-        ergSField = findViewById(R.id.timeset2);
-        prsclCField = findViewById(R.id.prscl2);
-        prsclRField = findViewById(R.id.prscl4);
+        hostTimeField = findViewById(R.id.Time_HostTimeV);
+        ergUField = findViewById(R.id.Time_UncorTimeV);
+        ergCField = findViewById(R.id.Time_CorrTimeV);
+        ergSField = findViewById(R.id.Time_TimeSetV);
+        prsclCField = findViewById(R.id.Time_PrsclCurrentV);
+        prsclRField = findViewById(R.id.Time_PrsclRecommendedV);
 
         // run the thread that must be done only once at activity creation
         Global.KillWatchThreadFlag = false;
@@ -101,10 +68,10 @@ public class TimeActivity extends AppCompatActivity {
         prsclCField.setText(timestring);
         // check if some buttons were pressed
         if (Global.SetTimeFlag) {
-            onSetTimeClick(findViewById(R.id.setTimeB));
+            onSetTimeClick(findViewById(R.id.Time_SetTimeB));
         }
         if (Global.SetPrsclFlag) {
-            onSetPrsclClick(findViewById(R.id.setPrsclB));
+            onSetPrsclClick(findViewById(R.id.Time_SetPrsclB));
         }
         Global.AllowLiveClockFlag = true;
     }

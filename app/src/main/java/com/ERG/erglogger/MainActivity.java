@@ -5,24 +5,18 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 
-import java.security.Permission;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,12 +26,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+    }
+
+
+    // do all the job
+    @Override
+    protected void onResume() {
+        super.onResume();
         //Getting the storage permission status
         int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED)
+        if (result == PackageManager.PERMISSION_GRANTED) {
             Log.i("storage permission", "GRANTED");
-        else {
+        } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Log.i("storage permission", "DENIED");
             return;
@@ -51,28 +52,22 @@ public class MainActivity extends AppCompatActivity {
                 Global.RiseError(this, false);
             }
             Log.i("directory", "CREATED");
-        }
-        else
+        } else {
             Log.i("directory", "EXISTS");
+        }
 
-    }
-
-    // do all the job
-    @Override
-    protected void onResume() {
-        super.onResume();
         // usb initial stuff and permissions
         manager = (UsbManager) getSystemService(Context.USB_SERVICE);
         if (manager.getDeviceList().isEmpty()) {
             Global.EXTRA_Message = "Cannot find any USB device";
             Global.RiseError(this, true);
             finish();
-        }
-        else {
+        } else {
             List<UsbSerialDriver> availableDrivers = CustomProber.getCustomProber().findAllDrivers(manager);
             if (availableDrivers.isEmpty()) {
                 Global.EXTRA_Message = "The device connected to the SmartPhone is unsupported:\n\nDevice 0483:5740 was not found";
                 Global.RiseError(this, true);
+                return;
             } else {
                 // check the permission and explicitly ask for it
                 // TODO: Fix the  twice-asking trouble!!!
@@ -133,32 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 Global.RiseError(this, true);
             }
         }
-    }
-
-
-
-    public void getStorageAccess() {
-        //Getting the permission status
-        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED)
-            Log.i("storage permission", "GRANTED");
-        else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            Log.i("storage permission", "DENIED");
-            return;
-        }
-        // creating a directory for files storing
-        if (!Global.directory.exists()) {
-            boolean success = Global.directory.mkdirs();
-            if (!success) {
-                Global.EXTRA_Message = "The directory for file storage was not created :(\n\n" +
-                        "The ERGlogger application requires the permission to access the storage of the device!";
-                Global.RiseError(this, false);
-            }
-            Log.i("directory", "CREATED");
-        }
-        else
-            Log.i("directory", "EXISTS");
     }
 }
 

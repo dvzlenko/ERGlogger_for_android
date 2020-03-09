@@ -1,21 +1,16 @@
 package com.ERG.erglogger;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.View;
@@ -69,23 +64,23 @@ public class TActivity extends AppCompatActivity {
         registerReceiver(detachReceiver, filter);
         // Device name
         String devinfo = Global.devinfo[2].replace(" ","")+"-"+Global.devinfo[3].replace(" ", "");
-        textView = findViewById(R.id.DevName);
+        textView = findViewById(R.id.T_DevNameW);
         textView.setText(devinfo);
         // date-time pickers settings
-        startDatePicker = findViewById(R.id.startDate);
-        stopDatePicker = findViewById(R.id.stopDate);
-        startTimePicker = findViewById(R.id.startTime);
+        startDatePicker = findViewById(R.id.T_StartDatePicker);
+        stopDatePicker = findViewById(R.id.T_StopDatePicker);
+        startTimePicker = findViewById(R.id.T_StartTimePicker);
         startTimePicker.setIs24HourView(Boolean.TRUE);
-        stopTimePicker = findViewById(R.id.stopTime);
+        stopTimePicker = findViewById(R.id.T_StopTimePicker);
         stopTimePicker.setIs24HourView(Boolean.TRUE);
         // disable progress bars
-        View text= findViewById(R.id.tdownloading);
+        View text= findViewById(R.id.T_DownloadingW);
         text.setVisibility(View.INVISIBLE);
         text.bringToFront();
-        ProgressBar cBar = findViewById(R.id.TcircularBar);
+        ProgressBar cBar = findViewById(R.id.T_CircularBar);
         cBar.setVisibility(View.INVISIBLE);
         cBar.getIndeterminateDrawable().setColorFilter(0xFF0099FF, android.graphics.PorterDuff.Mode.MULTIPLY);
-        ProgressBar lBar = findViewById(R.id.TlinearBar);
+        ProgressBar lBar = findViewById(R.id.T_LinearBar);
         lBar.setVisibility(View.INVISIBLE);
         lBar.getProgressDrawable().setColorFilter(Color.parseColor("#0099FF"), android.graphics.PorterDuff.Mode.SRC_IN);
     }
@@ -98,7 +93,7 @@ public class TActivity extends AppCompatActivity {
         refreshSchedule();
         // data part
         String message = String.format(Locale.getDefault(),"There is %d samples in the memory", Global.dataCollected/16);
-        textView = findViewById(R.id.text_DD);
+        textView = findViewById(R.id.T_DataCollectedW);
         textView.setText(message);
         // run setSchedule if necessary
         if (Global.SetLongScheduleFlag |
@@ -106,14 +101,14 @@ public class TActivity extends AppCompatActivity {
                 Global.SetStartInPastFlag |
                 Global.SetStopInPastFlag |
                 Global.SetFrequentFlag) {
-            setSchedule(findViewById(R.id.setScheduleB));
+            setSchedule(findViewById(R.id.T_SetScheduleB));
         }
         //
         if (Global.SaveFileFlag) {
-            onDownloadClick(findViewById(R.id.dataBB));
+            onDownloadClick(findViewById(R.id.T_DataBDownlodB));
         }
         if (Global.AdvancedDownloadFlag) {
-            onDownloadClick(findViewById(R.id.dataAB));
+            onDownloadClick(findViewById(R.id.T_DataADownlodB));
         }
     }
 
@@ -185,7 +180,7 @@ public class TActivity extends AppCompatActivity {
                             Global.startTime.setTimeInMillis(Long.parseLong(schedule[0]));
                             Global.stopTime.setTimeInMillis(Long.parseLong(schedule[1]));
                             Global.interval = Integer.parseInt(schedule[2]);
-                            setSchedule(findViewById(R.id.setScheduleB));
+                            setSchedule(findViewById(R.id.T_SetScheduleB));
                         }
                         else {
                             Global.EXTRA_Message = "Error reading ERG-schedule file!!!!";
@@ -352,7 +347,7 @@ public class TActivity extends AppCompatActivity {
     }
 
     public void grabSchedule() {
-        textView = findViewById(R.id.interval);
+        textView = findViewById(R.id.T_DataIntValue);
         Global.interval = Integer.parseInt(textView.getText().toString());
         Global.startTime.set(startDatePicker.getYear(), startDatePicker.getMonth(),startDatePicker.getDayOfMonth(),startTimePicker.getCurrentHour(), startTimePicker.getCurrentMinute(),0);
         Global.stopTime.set(stopDatePicker.getYear(), stopDatePicker.getMonth(),stopDatePicker.getDayOfMonth(),stopTimePicker.getCurrentHour(), stopTimePicker.getCurrentMinute(),0);
@@ -360,7 +355,7 @@ public class TActivity extends AppCompatActivity {
 
     public void refreshSchedule() {
         // refreshing the interval and schedule
-        textView = findViewById(R.id.interval);
+        textView = findViewById(R.id.T_DataIntValue);
         textView.setText(String.valueOf(Global.interval));
         //
         startDatePicker.updateDate(Global.startTime.get(Calendar.YEAR), Global.startTime.get(Calendar.MONTH), Global.startTime.get(Calendar.DAY_OF_MONTH));
@@ -388,7 +383,7 @@ public class TActivity extends AppCompatActivity {
 
     public void onDownloadClick(View view) {
         // define the amount of the data to download
-        if (view.getId() == findViewById(R.id.dataAB).getId()) {
+        if (view.getId() == findViewById(R.id.T_DataADownlodB).getId()) {
             if (!Global.AdvancedDownloadFlag) {
                 Intent intent = new Intent(this, AdvancedDownloadActivity.class);
                 intent.putExtra("volume", Global.dataCollected);
@@ -443,9 +438,9 @@ public class TActivity extends AppCompatActivity {
         }
         // disable all and start the progress bar
         disableActivity();
-        findViewById(R.id.TcircularBar).setVisibility(View.VISIBLE);
-        findViewById(R.id.TlinearBar).setVisibility(View.VISIBLE);
-        findViewById(R.id.tdownloading).setVisibility(View.VISIBLE);
+        findViewById(R.id.T_CircularBar).setVisibility(View.VISIBLE);
+        findViewById(R.id.T_LinearBar).setVisibility(View.VISIBLE);
+        findViewById(R.id.T_DownloadingW).setVisibility(View.VISIBLE);
         // finally defined activity is ne cessary for activities started from inside the thread
         final Activity this_activity = this;
         // downloading thread, UI will be released at this point, excepting two RunOnUiThread processes inside this thread :)
@@ -527,7 +522,7 @@ public class TActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ProgressBar progressBar = (ProgressBar) findViewById(R.id.TlinearBar);
+                                ProgressBar progressBar = (ProgressBar) findViewById(R.id.T_LinearBar);
                                 progressBar.setProgress(progress);
                             }
                         });
@@ -553,9 +548,9 @@ public class TActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         enableActivity();
-                        findViewById(R.id.TcircularBar).setVisibility(View.INVISIBLE);
-                        findViewById(R.id.TlinearBar).setVisibility(View.INVISIBLE);
-                        findViewById(R.id.tdownloading).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.T_CircularBar).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.T_LinearBar).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.T_DownloadingW).setVisibility(View.INVISIBLE);
                     }
                 });
                 Global.EXTRA_Message = "Download complete!!!";
@@ -565,7 +560,7 @@ public class TActivity extends AppCompatActivity {
     }
 
     public void onScheduleClick(View view) {
-        if (view.getId() == R.id.saveScheduleB) {
+        if (view.getId() == R.id.T_SaveScheduleB) {
             grabSchedule();
             Intent intent = new Intent("android.intent.action.CREATE_DOCUMENT");
             ((Intent) intent).addCategory("android.intent.category.OPENABLE");
@@ -577,7 +572,7 @@ public class TActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_TITLE, suggestedName);
             startActivityForResult(intent, CREATE_SCHEDULE_FILE_CODE);
         }
-        else if (view.getId() == R.id.loadScheduleB) {
+        else if (view.getId() == R.id.T_LoadScheduleB) {
             Intent intent = new Intent("android.intent.action.OPEN_DOCUMENT");
             ((Intent) intent).addCategory("android.intent.category.OPENABLE");
             ((Intent) intent).setType("text/plain");
@@ -587,55 +582,55 @@ public class TActivity extends AppCompatActivity {
 
     private void disableActivity() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        findViewById(R.id.dev1).setAlpha(0.1f);
-        findViewById(R.id.DevName).setAlpha(0.1f);
-        findViewById(R.id.dev_B).setAlpha(0.1f);
-        findViewById(R.id.time_B).setAlpha(0.1f);
-        findViewById(R.id.logotime).setAlpha(0.1f);
-        findViewById(R.id.text_DCS).setAlpha(0.1f);
-        findViewById(R.id.startDate).setAlpha(0.1f);
-        findViewById(R.id.startTime).setAlpha(0.1f);
-        findViewById(R.id.stopDate).setAlpha(0.1f);
-        findViewById(R.id.stopTime).setAlpha(0.1f);
-        findViewById(R.id.text_start).setAlpha(0.1f);
-        findViewById(R.id.text_finish).setAlpha(0.1f);
-        findViewById(R.id.text_interval).setAlpha(0.1f);
-        findViewById(R.id.interval).setAlpha(0.1f);
-        findViewById(R.id.setScheduleB).setAlpha(0.1f);
-        findViewById(R.id.saveScheduleB).setAlpha(0.1f);
-        findViewById(R.id.loadScheduleB).setAlpha(0.1f);
-        findViewById(R.id.text_DD).setAlpha(0.1f);
-        findViewById(R.id.dataBB).setAlpha(0.1f);
-        findViewById(R.id.dataAB).setAlpha(0.1f);
-        findViewById(R.id.dataAB).setAlpha(0.1f);
-        findViewById(R.id.dataAB).setAlpha(0.1f);
-        findViewById(R.id.TAcancelB).setAlpha(0.1f);
+        findViewById(R.id.T_DevConW).setAlpha(0.1f);
+        findViewById(R.id.T_DevNameW).setAlpha(0.1f);
+        findViewById(R.id.T_DevB).setAlpha(0.1f);
+        findViewById(R.id.T_TimeB).setAlpha(0.1f);
+        findViewById(R.id.T_LogoP).setAlpha(0.1f);
+        findViewById(R.id.T_DataCSW).setAlpha(0.1f);
+        findViewById(R.id.T_StartDatePicker).setAlpha(0.1f);
+        findViewById(R.id.T_StartTimePicker).setAlpha(0.1f);
+        findViewById(R.id.T_StopDatePicker).setAlpha(0.1f);
+        findViewById(R.id.T_StopTimePicker).setAlpha(0.1f);
+        findViewById(R.id.T_SchStartW).setAlpha(0.1f);
+        findViewById(R.id.T_SchFinishW).setAlpha(0.1f);
+        findViewById(R.id.T_SchIntW).setAlpha(0.1f);
+        findViewById(R.id.T_DataIntValue).setAlpha(0.1f);
+        findViewById(R.id.T_SetScheduleB).setAlpha(0.1f);
+        findViewById(R.id.T_SaveScheduleB).setAlpha(0.1f);
+        findViewById(R.id.T_LoadScheduleB).setAlpha(0.1f);
+        findViewById(R.id.T_DataCollectedW).setAlpha(0.1f);
+        findViewById(R.id.T_DataBDownlodB).setAlpha(0.1f);
+        findViewById(R.id.T_DataADownlodB).setAlpha(0.1f);
+        findViewById(R.id.T_DataADownlodB).setAlpha(0.1f);
+        findViewById(R.id.T_DataADownlodB).setAlpha(0.1f);
+        findViewById(R.id.T_CancelB).setAlpha(0.1f);
     }
 
     private void enableActivity() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        findViewById(R.id.dev1).setAlpha(1.0f);
-        findViewById(R.id.DevName).setAlpha(1.0f);
-        findViewById(R.id.dev_B).setAlpha(1.0f);
-        findViewById(R.id.time_B).setAlpha(1.0f);
-        findViewById(R.id.logotime).setAlpha(1.0f);
-        findViewById(R.id.text_DCS).setAlpha(1.0f);
-        findViewById(R.id.startDate).setAlpha(1.0f);
-        findViewById(R.id.startTime).setAlpha(1.0f);
-        findViewById(R.id.stopDate).setAlpha(1.0f);
-        findViewById(R.id.stopTime).setAlpha(1.0f);
-        findViewById(R.id.text_start).setAlpha(1.0f);
-        findViewById(R.id.text_finish).setAlpha(1.0f);
-        findViewById(R.id.text_interval).setAlpha(1.0f);
-        findViewById(R.id.interval).setAlpha(1.0f);
-        findViewById(R.id.setScheduleB).setAlpha(1.0f);
-        findViewById(R.id.saveScheduleB).setAlpha(1.0f);
-        findViewById(R.id.loadScheduleB).setAlpha(1.0f);
-        findViewById(R.id.text_DD).setAlpha(1.0f);
-        findViewById(R.id.dataBB).setAlpha(1.0f);
-        findViewById(R.id.dataAB).setAlpha(1.0f);
-        findViewById(R.id.dataAB).setAlpha(1.0f);
-        findViewById(R.id.dataAB).setAlpha(1.0f);
-        findViewById(R.id.TAcancelB).setAlpha(1.0f);
+        findViewById(R.id.T_DevConW).setAlpha(1.0f);
+        findViewById(R.id.T_DevNameW).setAlpha(1.0f);
+        findViewById(R.id.T_DevB).setAlpha(1.0f);
+        findViewById(R.id.T_TimeB).setAlpha(1.0f);
+        findViewById(R.id.T_LogoP).setAlpha(1.0f);
+        findViewById(R.id.T_DataCSW).setAlpha(1.0f);
+        findViewById(R.id.T_StartDatePicker).setAlpha(1.0f);
+        findViewById(R.id.T_StartTimePicker).setAlpha(1.0f);
+        findViewById(R.id.T_StopDatePicker).setAlpha(1.0f);
+        findViewById(R.id.T_StopTimePicker).setAlpha(1.0f);
+        findViewById(R.id.T_SchStartW).setAlpha(1.0f);
+        findViewById(R.id.T_SchFinishW).setAlpha(1.0f);
+        findViewById(R.id.T_SchIntW).setAlpha(1.0f);
+        findViewById(R.id.T_DataIntValue).setAlpha(1.0f);
+        findViewById(R.id.T_SetScheduleB).setAlpha(1.0f);
+        findViewById(R.id.T_SaveScheduleB).setAlpha(1.0f);
+        findViewById(R.id.T_LoadScheduleB).setAlpha(1.0f);
+        findViewById(R.id.T_DataCollectedW).setAlpha(1.0f);
+        findViewById(R.id.T_DataBDownlodB).setAlpha(1.0f);
+        findViewById(R.id.T_DataADownlodB).setAlpha(1.0f);
+        findViewById(R.id.T_DataADownlodB).setAlpha(1.0f);
+        findViewById(R.id.T_DataADownlodB).setAlpha(1.0f);
+        findViewById(R.id.T_CancelB).setAlpha(1.0f);
     }
 }
