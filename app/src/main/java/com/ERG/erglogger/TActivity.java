@@ -180,7 +180,8 @@ public class TActivity extends AppCompatActivity {
                             Global.startTime.setTimeInMillis(Long.parseLong(schedule[0]));
                             Global.stopTime.setTimeInMillis(Long.parseLong(schedule[1]));
                             Global.interval = Integer.parseInt(schedule[2]);
-                            setSchedule(findViewById(R.id.T_SetScheduleB));
+                            refreshSchedule();
+                            //setSchedule(findViewById(R.id.T_SetScheduleB));
                         }
                         else {
                             Global.EXTRA_Message = "Error reading ERG-schedule file!!!!";
@@ -211,10 +212,32 @@ public class TActivity extends AppCompatActivity {
         String startTime = String.format(Locale.US,"%2d:%2d:00",startTimePicker.getCurrentHour(), startTimePicker.getCurrentMinute()).replace(" ","0");
         String stopTime = String.format(Locale.US,"%2d:%2d:00",stopTimePicker.getCurrentHour(), stopTimePicker.getCurrentMinute()).replace(" ","0");
 
+        // check if the data collection interval is shorter than 3 sec. The device could be unstable due to the discrete time counter in MCU
+        if (Global.interval < 3) {
+            Global.EXTRA_Message = String.format(Locale.getDefault(),
+                    "The data collection interval MUST be at least 3 second, " +
+                            "while you have requested %d seconds\n\n" +
+                            "So short interval may force the device to brick out :(\n\n" +
+                            "Please, increase the interval!", Global.interval);
+            Global.RiseError(this, false);
+            return;
+        }
+
         long maxScheduleLength = 2*365*24*3600;
         long scheduleLength = Math.round((Global.stopTime.getTimeInMillis() - Global.startTime.getTimeInMillis()) / 1000);
         long scheduleVolume = Math.round((Global.stopTime.getTimeInMillis() - Global.startTime.getTimeInMillis())/(1000*Global.interval));
         long flashSize = Global.getFlashSize(this);
+        Log.i("schedule", "schedule length = " + String.valueOf(scheduleLength));
+        Log.i("schedule", "schedule volume = " + String.valueOf(scheduleVolume));
+
+        // check if the number of data points to collect is positive!
+        if (scheduleVolume < 0) {
+            Global.EXTRA_Message = String.format(Locale.getDefault(),
+                    "You have requested too sparce schedule, so no data will be collected!!!\n\n" +
+                            "Please, decrease the Data Collecting Interval");
+            Global.RiseError(this, false);
+            return;
+        }
 
         // check the amount of data points requested. Max available provided by getFlashSize()
         if (flashSize < 16*scheduleVolume) {
@@ -235,17 +258,6 @@ public class TActivity extends AppCompatActivity {
                             "that is later than it finishes:\n" +
                             stopDate + " " + stopTime + "\n\n" +
                             "Such a schedule is impossible!!!";
-            Global.RiseError(this, false);
-            return;
-        }
-
-        // check if the data collection interval is shorter than 3 sec. The device could be unstable due to the discrete time counter in MCU
-        if (Global.interval < 3) {
-            Global.EXTRA_Message = String.format(Locale.getDefault(),
-                    "The data collection interval MUST be at least 3 second, " +
-                            "while you have requested %d seconds\n\n" +
-                            "So short interval may force the device to brick out :(\n\n" +
-                            "Please, increase the interval!", Global.interval);
             Global.RiseError(this, false);
             return;
         }
@@ -348,7 +360,10 @@ public class TActivity extends AppCompatActivity {
 
     public void grabSchedule() {
         textView = findViewById(R.id.T_DataIntValue);
-        Global.interval = Integer.parseInt(textView.getText().toString());
+        if (textView.getText().toString().isEmpty())
+            Global.interval = 60;
+        else
+            Global.interval = Integer.parseInt(textView.getText().toString());
         Global.startTime.set(startDatePicker.getYear(), startDatePicker.getMonth(),startDatePicker.getDayOfMonth(),startTimePicker.getCurrentHour(), startTimePicker.getCurrentMinute(),0);
         Global.stopTime.set(stopDatePicker.getYear(), stopDatePicker.getMonth(),stopDatePicker.getDayOfMonth(),stopTimePicker.getCurrentHour(), stopTimePicker.getCurrentMinute(),0);
     }
@@ -561,14 +576,19 @@ public class TActivity extends AppCompatActivity {
 
     public void onScheduleClick(View view) {
         if (view.getId() == R.id.T_SaveScheduleB) {
-            grabSchedule();
+            //grabSchedule();
             Intent intent = new Intent("android.intent.action.CREATE_DOCUMENT");
             ((Intent) intent).addCategory("android.intent.category.OPENABLE");
             ((Intent) intent).setType("text/plain");
             // create default file-name
             String suggestedName = String.format("ERG_schedule-%04d.%02d.%02d-%02d:%02d-%04d.%02d.%02d-%02d:%02d.txt",
-                    Global.startTime.YEAR, Global.startTime.MONTH+1, Global.startTime.DAY_OF_MONTH,Global.startTime.HOUR_OF_DAY, Global.startTime.MINUTE,
-                    Global.stopTime.YEAR, Global.stopTime.MONTH+1, Global.stopTime.DAY_OF_MONTH,Global.stopTime.HOUR_OF_DAY, Global.stopTime.MINUTE);
+                    Global.startTime.get(Calendar.YEAR), Global.startTime.get(Calendar.MONTH)+1, Global.startTime.get(Calendar.DAY_OF_MONTH),
+                    Global.startTime.get(Calendar.HOUR_OF_DAY), Global.startTime.get(Calendar.MINUTE),
+                    Global.stopTime.get(Calendar.YEAR), Global.stopTime.get(Calendar.MONTH)+1, Global.stopTime.get(Calendar.DAY_OF_MONTH),
+                    Global.stopTime.get(Calendar.HOUR_OF_DAY), Global.stopTime.get(Calendar.MINUTE));
+            Log.i("schedule", "Suggested name: " + suggestedName);
+            //Log.i("schedule", "Year: " + Global.startTime.YEAR);
+            //Log.i("schedule", "millis: " + Global.startTime.getTimeInMillis());
             intent.putExtra(Intent.EXTRA_TITLE, suggestedName);
             startActivityForResult(intent, CREATE_SCHEDULE_FILE_CODE);
         }
