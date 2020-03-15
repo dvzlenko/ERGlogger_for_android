@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TActivity">
+    tools:context=".TPActivity">
 
     <DatePicker
         android:id="@+id/T_StartDatePicker"
@@ -61,14 +61,13 @@
         android:id="@+id/T_DevNameW"
         android:layout_width="110pt"
         android:layout_height="20pt"
-        android:layout_marginStart="20dp"
         android:background="@null"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/DevName"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/T_DevConW" />
+        app:layout_constraintTop_toBottomOf="@+id/Time_DevConW" />
 
     <TextView
         android:id="@+id/T_DataCSW"

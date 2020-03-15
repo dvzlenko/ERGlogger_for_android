@@ -40,6 +40,7 @@
         android:id="@+id/name_CANCEL_B"
         android:layout_width="40pt"
         android:layout_height="48dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="70dp"
         android:hint="@string/cancel"
         android:onClick="nameButtonClick"
@@ -57,6 +58,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="MESSAGE logo"
         app:srcCompat="@drawable/ic_confirm" />
 
     <ImageView
@@ -67,6 +69,7 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="MESSAGE logo"
         app:srcCompat="@drawable/ic_confirm" />
 
     <TextView

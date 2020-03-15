@@ -177,7 +177,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="-12dp"
             android:layout_toEndOf="@id/T_SchIntW"
-            android:inputType="numberDecimal"
+            android:inputType="number"
+            android:maxLength="9"
             android:text="0"
             android:textAlignment="center" />
 

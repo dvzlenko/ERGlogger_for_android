@@ -40,6 +40,7 @@
         android:id="@+id/warning_CANCEL_B"
         android:layout_width="40pt"
         android:layout_height="48dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="100dp"
         android:hint="@string/cancel"
@@ -57,6 +58,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="WARNING logo"
         app:srcCompat="@drawable/ic_warning" />
 
     <ImageView
@@ -67,6 +69,7 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="WARNING logo"
         app:srcCompat="@drawable/ic_warning" />
 
     <TextView
