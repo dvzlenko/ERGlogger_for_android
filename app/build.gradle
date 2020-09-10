@@ -7,8 +7,8 @@ android {
         applicationId "com.ERG.erglogger"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.10"
+        versionCode 3
+        versionName "2.00"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         setProperty("archivesBaseName", "ERGlogger-$versionName")
