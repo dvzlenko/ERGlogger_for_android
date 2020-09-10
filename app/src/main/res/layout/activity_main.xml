@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="ERG Research Group logo"
-        app:srcCompat="@drawable/ic_erglogo" />
+        app:srcCompat="@drawable/ic_charrlogo" />
 
     <TextView
         android:id="@+id/textView"

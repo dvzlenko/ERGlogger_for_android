@@ -73,14 +73,14 @@
         app:srcCompat="@drawable/ic_confirm" />
 
     <TextView
-        android:id="@+id/err"
+        android:id="@+id/FileName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:hint="@string/name"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ff000000"
         android:textColorHint="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"

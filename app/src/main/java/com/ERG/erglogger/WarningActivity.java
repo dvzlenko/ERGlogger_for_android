@@ -40,6 +40,10 @@ public class WarningActivity extends AppCompatActivity {
                 Global.SetTimeFlag = true;
             if (flag.equals("SetPrscl"))
                 Global.SetPrsclFlag = true;
+            if (flag.equals("Adwnld"))
+                Global.AdvancedDownloadFlag = false;
+
+
         }
         else {
             // schedule

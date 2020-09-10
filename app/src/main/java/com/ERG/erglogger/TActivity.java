@@ -92,7 +92,7 @@ public class TActivity extends AppCompatActivity {
         getSchedule();
         refreshSchedule();
         // data part
-        String message = String.format(Locale.getDefault(),"There is %d samples in the memory", Global.dataCollected/16);
+        String message = String.format(Locale.getDefault(),"There is %d samples in the memory", Global.dataCollectedT / 16);
         textView = findViewById(R.id.T_DataCollectedW);
         textView.setText(message);
         // run setSchedule if necessary
@@ -104,7 +104,7 @@ public class TActivity extends AppCompatActivity {
             setSchedule(findViewById(R.id.T_SetScheduleB));
         }
         //
-        if (Global.SaveFileFlag) {
+        if (Global.SaveTFileFlag) {
             onDownloadClick(findViewById(R.id.T_DataBDownlodB));
         }
         if (Global.AdvancedDownloadFlag) {
@@ -130,8 +130,8 @@ public class TActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, resultData);
         if (requestCode == CREATE_SCHEDULE_FILE_CODE && resultCode == Activity.RESULT_OK) {
             // get the schedule
-            Log.i("schedule", Global.startTime.getTimeInMillis()+" "+Global.stopTime.getTimeInMillis()+" "+Global.interval);
-            String schedule = String.format("%d\n%d\n%d\n", Global.startTime.getTimeInMillis(), Global.stopTime.getTimeInMillis(), Global.interval);
+            Log.i("schedule", Global.startTime.getTimeInMillis()+" "+Global.stopTime.getTimeInMillis()+" "+Global.intervalT);
+            String schedule = String.format("%d\n%d\n%d\n", Global.startTime.getTimeInMillis(), Global.stopTime.getTimeInMillis(), Global.intervalT);
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
@@ -179,7 +179,7 @@ public class TActivity extends AppCompatActivity {
                         if (schedule.length == 3) {
                             Global.startTime.setTimeInMillis(Long.parseLong(schedule[0]));
                             Global.stopTime.setTimeInMillis(Long.parseLong(schedule[1]));
-                            Global.interval = Integer.parseInt(schedule[2]);
+                            Global.intervalT = Integer.parseInt(schedule[2]);
                             refreshSchedule();
                             //setSchedule(findViewById(R.id.T_SetScheduleB));
                         }
@@ -213,19 +213,19 @@ public class TActivity extends AppCompatActivity {
         String stopTime = String.format(Locale.US,"%2d:%2d:00",stopTimePicker.getCurrentHour(), stopTimePicker.getCurrentMinute()).replace(" ","0");
 
         // check if the data collection interval is shorter than 3 sec. The device could be unstable due to the discrete time counter in MCU
-        if (Global.interval < 3) {
+        if (Global.intervalT < 3) {
             Global.EXTRA_Message = String.format(Locale.getDefault(),
                     "The data collection interval MUST be at least 3 second, " +
                             "while you have requested %d seconds\n\n" +
                             "So short interval may force the device to brick out :(\n\n" +
-                            "Please, increase the interval!", Global.interval);
+                            "Please, increase the interval!", Global.intervalT);
             Global.RiseError(this, false);
             return;
         }
 
         long maxScheduleLength = 2*365*24*3600;
         long scheduleLength = Math.round((Global.stopTime.getTimeInMillis() - Global.startTime.getTimeInMillis()) / 1000);
-        long scheduleVolume = Math.round((Global.stopTime.getTimeInMillis() - Global.startTime.getTimeInMillis())/(1000*Global.interval));
+        long scheduleVolume = Math.round((Global.stopTime.getTimeInMillis() - Global.startTime.getTimeInMillis())/(1000*Global.intervalT));
         long flashSize = Global.getFlashSize(this);
         Log.i("schedule", "schedule length = " + String.valueOf(scheduleLength));
         Log.i("schedule", "schedule volume = " + String.valueOf(scheduleVolume));
@@ -287,13 +287,13 @@ public class TActivity extends AppCompatActivity {
         }
 
         // check the data collection interval again, warning is necessary if it is shorter than a minute
-        if (Global.interval < 60 & !Global.SetFrequentFlag) {
+        if (Global.intervalT < 60 & !Global.SetFrequentFlag) {
             Global.EXTRA_Message = String.format(Locale.getDefault(),
                     "You are going to collect the data each %d seconds\n\n" +
                             "Such a short (shorter than a minute) interval " +
                             "will cause some overestimate " +
                             "of the absolute value of the temperature",
-                    Global.interval);
+                    Global.intervalT);
             Global.RiseWarning(this, "SetFrequent");
             return;
         }
@@ -316,7 +316,7 @@ public class TActivity extends AppCompatActivity {
                     "Data collection will start at:\n" +
                     startDate + " " + startTime + "\nand will finish at:\n" +
                     stopDate + " " + stopTime + "\n\nData collecting interval is:\n" +
-                    Global.interval.toString()+" sec\n\nThere will be collected\n" +
+                    Global.intervalT.toString()+" sec\n\nThere will be collected\n" +
                     scheduleVolume + " data points, per\n" +
                     scheduleLength/(24*3600) + " days.";
             Global.RiseMessage(this, "SetSchedule");
@@ -324,7 +324,7 @@ public class TActivity extends AppCompatActivity {
         }
 
         // set the schedule
-        String command = String.format("SetProgramm %d %d %d\r", Global.interval, Global.startTime.getTimeInMillis()/1000, Global.stopTime.getTimeInMillis()/1000);
+        String command = String.format("SetProgramm %d %d %d\r", Global.intervalT, Global.startTime.getTimeInMillis()/1000, Global.stopTime.getTimeInMillis()/1000);
         Global.CDC_Send(command, this);
         String reply = Global.CDC_Get_String(this);
         Log.i("schedule", reply);
@@ -349,8 +349,8 @@ public class TActivity extends AppCompatActivity {
             Log.i("schedule", reply);
             //String reply = "GetProgramm\r\n5d630\r\n1480752135\r\n1530752149\r\n56\r\nOK";
             // collection interval and data available
-            Global.dataCollected = Integer.parseInt(schedule[1], 16);
-            Global.interval = Integer.parseInt(schedule[4]);
+            Global.dataCollectedT = Integer.parseInt(schedule[1], 16);
+            Global.intervalT = Integer.parseInt(schedule[4]);
             // start and stop date&time
             Global.startTime.setTimeInMillis(Long.parseLong(schedule[2])*1000);
             Global.stopTime.setTimeInMillis(Long.parseLong(schedule[3])*1000);
@@ -361,9 +361,9 @@ public class TActivity extends AppCompatActivity {
     public void grabSchedule() {
         textView = findViewById(R.id.T_DataIntValue);
         if (textView.getText().toString().isEmpty())
-            Global.interval = 60;
+            Global.intervalT = 60;
         else
-            Global.interval = Integer.parseInt(textView.getText().toString());
+            Global.intervalT = Integer.parseInt(textView.getText().toString());
         Global.startTime.set(startDatePicker.getYear(), startDatePicker.getMonth(),startDatePicker.getDayOfMonth(),startTimePicker.getCurrentHour(), startTimePicker.getCurrentMinute(),0);
         Global.stopTime.set(stopDatePicker.getYear(), stopDatePicker.getMonth(),stopDatePicker.getDayOfMonth(),stopTimePicker.getCurrentHour(), stopTimePicker.getCurrentMinute(),0);
     }
@@ -371,7 +371,7 @@ public class TActivity extends AppCompatActivity {
     public void refreshSchedule() {
         // refreshing the interval and schedule
         textView = findViewById(R.id.T_DataIntValue);
-        textView.setText(String.valueOf(Global.interval));
+        textView.setText(String.valueOf(Global.intervalT));
         //
         startDatePicker.updateDate(Global.startTime.get(Calendar.YEAR), Global.startTime.get(Calendar.MONTH), Global.startTime.get(Calendar.DAY_OF_MONTH));
         startTimePicker.setCurrentHour(Global.startTime.get(Calendar.HOUR_OF_DAY));
@@ -401,7 +401,8 @@ public class TActivity extends AppCompatActivity {
         if (view.getId() == findViewById(R.id.T_DataADownlodB).getId()) {
             if (!Global.AdvancedDownloadFlag) {
                 Intent intent = new Intent(this, AdvancedDownloadActivity.class);
-                intent.putExtra("volume", Global.dataCollected);
+                intent.putExtra("volume", Global.dataCollectedT);
+                intent.putExtra("mode", "Temperature");
                 startActivity(intent);
                 return;
             } else {
@@ -410,25 +411,24 @@ public class TActivity extends AppCompatActivity {
         }
         else {
             if (Global.BasicDownloadFlag) {
-                Global.Address = 0;
-                Global.Volume = Global.dataCollected;
+                Global.AddressT1 = 0;
+                Global.VolumeT = Global.dataCollectedT;
             }
         }
         // pick the file name
-        if (!Global.SaveFileFlag) {
-            Intent intent = new Intent(this, NameActivity.class);
-            startActivity(intent);
+        if (!Global.SaveTFileFlag) {
+            Global.AskFileName(this, "T");
             return;
         }
-        Global.SaveFileFlag = false;
+        Global.SaveTFileFlag = false;
         Global.BasicDownloadFlag = true;
         // run the download
         dataDownload();
     }
 
     public void dataDownload() {
-        final File tempFile = new File(Global.directory, Global.EXTRA_Name);
-        final File voltFile = new File(Global.directory, "VOLTAGE-"+Global.EXTRA_Name);
+        final File tempFile = new File(Global.directory, Global.EXTRA_TName);
+        final File voltFile = new File(Global.directory, "VOLTAGE-"+Global.EXTRA_TName);
         // kick up a user not to overwrite
         if (tempFile.exists() | voltFile.exists()) {
             Global.EXTRA_Message =
@@ -467,7 +467,7 @@ public class TActivity extends AppCompatActivity {
                     FileOutputStream voltOutputStream = new FileOutputStream(voltFile);
                     FileOutputStream tempOutputStream = new FileOutputStream(tempFile);
                     // headers
-                    final DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss YYYY");
+                    final DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy");
                     String header;
                     String cDate = dateFormat.format(new Date());
                     // temperature file header
@@ -485,7 +485,7 @@ public class TActivity extends AppCompatActivity {
                                     Global.devinfo[3].replace(" ", "") + "\n#\t\tDr. Zoidberg\n#\n";
                     voltOutputStream.write((header).getBytes());
                     // parse the calibration coefficients as floats
-                    Log.i("cycle", "vol = " + Global.Volume + "; address = " + Global.Address);
+                    Log.i("cycle", "vol = " + Global.VolumeT + "; address = " + Global.AddressT1);
                     float A11 = Float.parseFloat(Global.devinfo[8]);
                     float A12 = Float.parseFloat(Global.devinfo[9]);
                     float A13 = Float.parseFloat(Global.devinfo[10]);
@@ -499,15 +499,22 @@ public class TActivity extends AppCompatActivity {
                     float A33 = Float.parseFloat(Global.devinfo[18]);
                     float R3 = Float.parseFloat(Global.devinfo[19]);
                     // run the download itself (per Global.pagesize pieces)
-                    int address = Global.Address;
-                    while (address < Global.Volume) {
+                    int address = Global.AddressT1;
+                    int num;
+                    long dateLong;
+                    long[] reply;
+                    long[] V = new long[3];
+                    float[] T = new float[3];
+                    String command;
+                    String dateString;
+                    while (address < Global.VolumeT) {
                         // number of bytes to read at this iteration of while
-                        int num = Global.pagesize * (((int) (address / Global.pagesize) < (int) (Global.Volume / Global.pagesize)) ? 1 : 0) +
-                                (Global.Volume % Global.pagesize) * (((int) (address / Global.pagesize) == (int) (Global.Volume / Global.pagesize)) ? 1 : 0);
+                        num = Global.pagesize * (((int) (address / Global.pagesize) < (int) (Global.VolumeT / Global.pagesize)) ? 1 : 0) +
+                                (Global.VolumeT % Global.pagesize) * (((int) (address / Global.pagesize) == (int) (Global.VolumeT / Global.pagesize)) ? 1 : 0);
                         // get the data
-                        String command = String.format("SendDataToX86 %d %06x\r\n", num, address);
+                        command = String.format("SendDataToX86 %d %06x\r\n", num, address);
                         Global.CDC_Send(command, this_activity);
-                        long[] reply = Global.CDC_Get_Data(this_activity, num, command.length());
+                        reply = Global.CDC_Get_Data(this_activity, num, command.length());
                         address += num;
                         Log.i("cylce", command);
                         Log.i("cycle", "num = " + num + "; address = " + address);
@@ -516,24 +523,25 @@ public class TActivity extends AppCompatActivity {
                         StringBuilder voltStringBuilder = new StringBuilder();
                         StringBuilder tempStringBuilder = new StringBuilder();
                         for (int p = 0; p < reply.length / (16); p++) {
-                            long dateLong = reply[4 * p] * 1000;
-                            String dateString = dateFormat.format(dateLong);
-                            long V1 = reply[4 * p + 1] - 4294967295L * ((reply[4 * p + 1] > 2147483648L) ? 1 : 0);
-                            long V2 = reply[4 * p + 2] - 4294967295L * ((reply[4 * p + 2] > 2147483648L) ? 1 : 0);
-                            long V3 = reply[4 * p + 3] - 4294967295L * ((reply[4 * p + 3] > 2147483648L) ? 1 : 0);
+                            dateLong = reply[4 * p] * 1000;
+                            dateString = dateFormat.format(dateLong);
+                            Log.i("date",dateLong + " -> " + dateString);
+                            V[0] = reply[4 * p + 1] - 4294967295L * ((reply[4 * p + 1] > 2147483648L) ? 1 : 0);
+                            V[1] = reply[4 * p + 2] - 4294967295L * ((reply[4 * p + 2] > 2147483648L) ? 1 : 0);
+                            V[2] = reply[4 * p + 3] - 4294967295L * ((reply[4 * p + 3] > 2147483648L) ? 1 : 0);
                             // convert to temperatures
-                            float T1 = Global.tenz2temp(V1, A11, A12, A13, R1);
-                            float T2 = Global.tenz2temp(V2, A21, A22, A23, R2);
-                            float T3 = Global.tenz2temp(V3, A31, A32, A33, R3);
+                            T[0] = Global.tenz2temp(V[0], A11, A12, A13, R1);
+                            T[1] = Global.tenz2temp(V[1], A21, A22, A23, R2);
+                            T[2] = Global.tenz2temp(V[2], A31, A32, A33, R3);
                             // strings
-                            voltStringBuilder.append(dateString).append("\t").append(V1).append("\t").append(V2).append("\t").append(V3).append("\n");
-                            tempStringBuilder.append(dateString).append("\t").append(T1).append("\t\t").append(T2).append("\t\t").append(T3).append("\n");
+                            voltStringBuilder.append(dateString).append("\t").append(V[0]).append("\t").append(V[1]).append("\t").append(V[2]).append("\n");
+                            tempStringBuilder.append(dateString).append("\t").append(T[0]).append("\t\t").append(T[1]).append("\t\t").append(T[2]).append("\n");
                         }
                         // files writing
                         voltOutputStream.write((voltStringBuilder.toString()).getBytes());
                         tempOutputStream.write((tempStringBuilder.toString()).getBytes());
                         // move a progress a bit. 100 - is set as a maximum in the corresponding xml
-                        final int progress = 100*address/Global.Volume;
+                        final int progress = 100*address/Global.VolumeT;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

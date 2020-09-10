@@ -39,14 +39,15 @@
             android:id="@+id/DT_LogoP"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:adjustViewBounds="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/DT_DevNameW"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@id/DT_DevNameW"
+            android:adjustViewBounds="true"
             android:contentDescription="ERG Research Rgoup logo"
-            app:srcCompat="@drawable/ic_erglogo" />
+            app:srcCompat="@drawable/ic_charrlogo" />
 
         <TextView
             android:id="@+id/DT_info11"

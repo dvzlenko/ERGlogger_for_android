@@ -42,7 +42,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:contentDescription="ERG Research Rgoup logo"
-            app:srcCompat="@drawable/ic_erglogo" />
+            app:srcCompat="@drawable/ic_charrlogo" />
 
 
         <TextView

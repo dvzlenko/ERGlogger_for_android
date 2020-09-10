@@ -11,11 +11,12 @@
         android:layout_width="55pt"
         android:layout_height="55pt"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="0dp"
         android:contentDescription="ERG Research Rgoup logo"
-        app:srcCompat="@drawable/ic_erglogo" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/devName2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_charrlogo" />
 
     <TextView
         android:id="@+id/dev2"

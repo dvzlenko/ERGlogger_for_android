@@ -44,7 +44,7 @@
             android:layout_toEndOf="@id/T_DevNameW"
             android:adjustViewBounds="true"
             android:contentDescription="ERG Research Rgoup logo"
-            app:srcCompat="@drawable/ic_erglogo" />
+            app:srcCompat="@drawable/ic_charrlogo" />
 
         <Button
             android:id="@+id/T_DevB"

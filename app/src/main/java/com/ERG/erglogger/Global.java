@@ -28,19 +28,27 @@ public class Global {
     public static boolean AllowLiveClockFlag = false;
     public static boolean KillWatchThreadFlag = true;
     // data download flags
-    public static boolean SaveFileFlag = false;
+    public static boolean SaveTFileFlag = false;
+    public static boolean SavePFileFlag = false;
     public static boolean AdvancedDownloadFlag = false;
     public static boolean BasicDownloadFlag = true;
     //
     public static String EXTRA_Message = "message";
-    public static String EXTRA_Name = "ERG";
+    public static String EXTRA_TName = "ERG";
+    public static String EXTRA_PName = "ERG";
     public static String EXTRA_Flag = "flag";
     public static String[] devinfo;
     //public static String[] schedule;
-    public static Integer Address = 0;
-    public static Integer Volume = 0;
-    public static Integer interval = 60;
-    public static Integer dataCollected = 0;
+    public static Integer AddressT1 = 0;    // starting address
+    public static Integer AddressT2 = 0;    // final address
+    public static Integer AddressP1 = 0;    // initial address
+    public static Integer AddressP2 = 0;    // final address
+    public static Integer VolumeT = 0;
+    public static Integer VolumeP = 0;
+    public static Integer intervalT = 60;
+    public static Integer intervalP = 60;
+    public static Integer dataCollectedT = 0;
+    public static Integer dataCollectedP = 0;
     public static Calendar startTime = Calendar.getInstance();
     public static Calendar stopTime = Calendar.getInstance();
     public static UsbSerialPort port;
@@ -67,6 +75,13 @@ public class Global {
     // rises the MessageActivity with some stupid message
     public static void RiseMessage(Activity obj, String flag) {
         Intent intent = new Intent(obj, MessageActivity.class);
+        intent.putExtra(Global.EXTRA_Flag, flag);
+        obj.startActivity(intent);
+    }
+
+    // rises the NameActivity fot T or P
+    public static void AskFileName(Activity obj, String flag) {
+        Intent intent = new Intent(obj, NameActivity.class);
         intent.putExtra(Global.EXTRA_Flag, flag);
         obj.startActivity(intent);
     }
@@ -209,4 +224,16 @@ public class Global {
         return (float) Math.floor(10000*((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0)/10000;
         //return ((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0;
     }
+
+    public static float[] LongsToFloats(long[] input) {
+        if (input == null) {
+            return null;
+        }
+        float[] output = new float[input.length];
+        for (int i = 0; i < input.length; i++) {
+            output[i] = input[i];
+        }
+        return output;
+    }
+
 }

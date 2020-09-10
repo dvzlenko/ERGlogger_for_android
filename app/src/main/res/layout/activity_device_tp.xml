@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeviceTActivity">
+    tools:context=".DeviceTPActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/DT_DevConW"
+            android:id="@+id/DTP_DevConW"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -25,10 +25,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/DT_DevNameW"
+            android:id="@+id/DTP_DevNameW"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/DT_DevConW"
+            android:layout_below="@+id/DTP_DevConW"
             android:layout_marginStart="5dp"
             android:layout_marginTop="0dp"
             android:hint="@string/DevName"
@@ -36,169 +36,218 @@
             android:textColorHint="@android:color/black" />
 
         <ImageView
-            android:id="@+id/DT_LogoP"
+            android:id="@+id/DTP_LogoP"
             android:layout_width="fill_parent"
             android:layout_height="100dp"
             android:adjustViewBounds="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/DT_DevNameW"
+            android:layout_toEndOf="@id/DTP_DevNameW"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="20dp"
             android:contentDescription="ERG Research Rgoup logo"
-            app:srcCompat="@drawable/ic_erglogo" />
+            app:srcCompat="@drawable/ic_charrlogo" />
 
         <TextView
-            android:id="@+id/DT_info11"
+            android:id="@+id/DTP_info11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="0dp"
-            android:layout_below="@+id/DT_LogoP"
+            android:layout_below="@+id/DTP_LogoP"
             android:hint="@string/mcu"
             android:textColorHint="@android:color/black" />
 
         <TextView
-            android:id="@+id/DT_info12"
+            android:id="@+id/DTP_info12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="0dp"
-            android:layout_below="@+id/DT_LogoP"
-            android:layout_toEndOf="@id/DT_info31"
+            android:layout_below="@+id/DTP_LogoP"
+            android:layout_toEndOf="@id/DTP_info51"
             android:text="SOME UNIT"/>
 
         <TextView
-            android:id="@+id/DT_info21"
+            android:id="@+id/DTP_info21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/DT_info11"
+            android:layout_below="@+id/DTP_info11"
             android:hint="@string/adc"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
         <TextView
-            android:id="@+id/DT_info22"
+            android:id="@+id/DTP_info22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/DT_info12"
-            android:layout_toEndOf="@id/DT_info31"
+            android:layout_below="@+id/DTP_info12"
+            android:layout_toEndOf="@id/DTP_info51"
             android:text="SOME ADC"/>
 
         <TextView
-            android:id="@+id/DT_info31"
+            android:id="@+id/DTP_info31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/DT_info21"
+            android:layout_below="@+id/DTP_info21"
             android:hint="@string/mem"
             android:textColorHint="@android:color/black" />
 
         <TextView
-            android:id="@+id/DT_info32"
+            android:id="@+id/DTP_info32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/DT_info22"
-            android:layout_toEndOf="@id/DT_info31"
+            android:layout_below="@+id/DTP_info22"
+            android:layout_toEndOf="@id/DTP_info51"
             android:text="SOME FLASH" />
 
         <TextView
-            android:id="@+id/DT_info41"
+            android:id="@+id/DTP_info41"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/DT_info31"
-            android:hint="@string/sensor"
+            android:layout_below="@+id/DTP_info31"
+            android:hint="T-sensor unit"
             android:textColorHint="@android:color/black" />
 
         <TextView
-            android:id="@+id/DT_info42"
+            android:id="@+id/DTP_info42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/DT_info32"
-            android:layout_toEndOf="@id/DT_info31"
+            android:layout_below="@+id/DTP_info32"
+            android:layout_toEndOf="@id/DTP_info51"
+            android:text="SOME SENSOR" />
+
+
+        <TextView
+            android:id="@+id/DTP_info51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DTP_info41"
+            android:hint="P-sensor unit"
+            android:textColorHint="@android:color/black" />
+
+        <TextView
+            android:id="@+id/DTP_info52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/DTP_info42"
+            android:layout_toEndOf="@id/DTP_info51"
             android:text="SOME SENSOR" />
 
         <TextView
-            android:id="@+id/DT_CalCoefW"
+            android:id="@+id/DTP_CalCoefWT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
-            android:layout_below="@+id/DT_info41"
-            android:hint="@string/cal"
+            android:layout_below="@+id/DTP_info51"
+            android:hint="Temperature calibration"
             android:textColorHint="@android:color/black" />
 
         <TextView
-            android:id="@+id/DT_r1"
+            android:id="@+id/DTP_r1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:text="r1 = 1000.0"
-            android:layout_below="@+id/DT_CalCoefW" />
+            android:layout_below="@+id/DTP_CalCoefWT" />
 
         <TextView
-            android:id="@+id/DT_a1"
+            android:id="@+id/DTP_a1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:text="A1 = WWW, A2 = WWW, A3 = WWW"
-            android:layout_below="@+id/DT_r1" />
+            android:layout_below="@+id/DTP_r1" />
 
         <TextView
-            android:id="@+id/DT_r2"
+            android:id="@+id/DTP_r2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:text="r2 = 1000"
-            android:layout_below="@+id/DT_a1"/>
+            android:layout_below="@+id/DTP_a1"/>
 
         <TextView
-            android:id="@+id/DT_a2"
+            android:id="@+id/DTP_a2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:text="A1 = WWW, A2 = WWW, A3 = WWW"
-            android:layout_below="@+id/DT_r2" />
+            android:layout_below="@+id/DTP_r2" />
 
         <TextView
-            android:id="@+id/DT_r3"
+            android:id="@+id/DTP_r3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:text="r3 = 1000"
-            android:layout_below="@+id/DT_a2" />
+            android:layout_below="@+id/DTP_a2" />
 
         <TextView
-            android:id="@+id/DT_a3"
+            android:id="@+id/DTP_a3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:text="A1 = WWW, A2 = WWW, A3 = WWW"
-            android:layout_below="@+id/DT_r3" />
+            android:layout_below="@+id/DTP_r3" />
+
+        <TextView
+            android:id="@+id/DTP_CalCoefWP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/DTP_a3"
+            android:hint="Pressure calibration"
+            android:textColorHint="@android:color/black" />
+
+        <TextView
+            android:id="@+id/DTP_PC1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="P2Ts = WWW"
+            android:layout_below="@+id/DTP_CalCoefWP" />
+
+        <TextView
+            android:id="@+id/DTP_PC2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="V2Ps = WWW, V2Pc = WWW"
+            android:layout_below="@+id/DTP_PC1" />
 
         <Button
-            android:id="@+id/DT_CloseB"
+            android:id="@+id/DTP_CloseB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/DT_a3"
+            android:layout_below="@+id/DTP_PC2"
             android:layout_centerHorizontal="true"
             android:hint="@string/cancel"
             android:onClick="onButtonClick"
