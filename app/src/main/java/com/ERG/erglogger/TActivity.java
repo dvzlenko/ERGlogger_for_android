@@ -10,8 +10,11 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -428,6 +431,7 @@ public class TActivity extends AppCompatActivity {
 
     public void dataDownload() {
         final File tempFile = new File(Global.directory, Global.EXTRA_TName);
+        //final File tempFile = new File(new File(Global.directory, Global.EXTRA_TName), Global.EXTRA_TName);
         final File voltFile = new File(Global.directory, "VOLTAGE-"+Global.EXTRA_TName);
         // kick up a user not to overwrite
         if (tempFile.exists() | voltFile.exists()) {
@@ -441,6 +445,13 @@ public class TActivity extends AppCompatActivity {
         }
         // try to create new files
         try {
+            Log.i("write access", String.valueOf(voltFile));
+            Log.i("write access", String.valueOf(tempFile));
+            Log.i("write access", "Diretrory exists : " + Global.directory.exists());
+            if (Build.VERSION.SDK_INT >= 30) {
+                Log.i("write access", "Storage Manager : " + Environment.isExternalStorageManager());
+            }
+            // TRY!!!
             voltFile.createNewFile();
             tempFile.createNewFile();
         }

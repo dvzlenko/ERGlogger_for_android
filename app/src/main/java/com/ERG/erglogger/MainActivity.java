@@ -11,13 +11,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 
 import java.util.List;
+
+import static android.app.PendingIntent.FLAG_MUTABLE;
 
 public class MainActivity extends AppCompatActivity {
     UsbManager manager;
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        askForPermissions();
         //setContentView(R.layout.activity_main);
     }
 
@@ -76,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("usb permission", "DENIED");
                     manager.requestPermission(
                             driver.getDevice(),
-                            PendingIntent.getBroadcast(this, 0, new Intent("com.android.example.USB_PERMISSION"), PendingIntent.FLAG_ONE_SHOT));
+                            PendingIntent.getBroadcast(this, 0, new Intent("com.android.example.USB_PERMISSION"),
+                                    FLAG_MUTABLE));
+                                    //PendingIntent.FLAG_ONE_SHOT));
                     return;
                 } else {
                     Log.i("usb permission", "GRANTED");
@@ -86,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     // quit main activity after device was connected and all of the permissions were granted
     @Override
     protected void onStop() {
@@ -94,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goOn() {
+        // ask for file access!!!
         UsbDeviceConnection connection = manager.openDevice(driver.getDevice());
         Global.port = driver.getPorts().get(0);
         try {
@@ -108,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             Global.port.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
         } catch (Exception exp) {
             exp.printStackTrace();
-            Global.EXTRA_Message = "Port adjustment failed.\n\nException messagew is:\n\n" + exp.getMessage();
+            Global.EXTRA_Message = "Port adjustment failed.\n\nException message is:\n\n" + exp.getMessage();
             Global.RiseError(this, true);
         }
         // initial hand-shake
@@ -126,6 +138,19 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Global.EXTRA_Message = "Device was not recognized :(";
                 Global.RiseError(this, true);
+            }
+        }
+    }
+    public void askForPermissions() {
+        int APP_STORAGE_ACCESS_REQUEST_CODE = 501;
+        if (Build.VERSION.SDK_INT >= 30) {
+            if (!Environment.isExternalStorageManager()) {
+                //Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                //startActivityForResult(intent);
+                //Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:" + BuildConfig.APPLICATION_ID));
+                //startActivityForResult(intent, APP_STORAGE_ACCESS_REQUEST_CODE);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, APP_STORAGE_ACCESS_REQUEST_CODE);
             }
         }
     }

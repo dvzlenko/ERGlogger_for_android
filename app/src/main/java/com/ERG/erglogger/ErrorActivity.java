@@ -27,9 +27,8 @@ public class ErrorActivity extends AppCompatActivity {
     }
 
     public void buttonClick(View view) {
-        if (exit) {
+        if (exit)
             finishAffinity();
-        }
         else
             finish();
     }

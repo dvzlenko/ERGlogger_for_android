@@ -39,7 +39,8 @@ public class NameActivity extends AppCompatActivity {
         String suggestedName = tmp +
                     Global.devinfo[2].replace(" ", "") + "-" +
                     Global.devinfo[3].replace(" ", "") +
-                    String.format(Locale.getDefault(),"-%4d.%02d.%02d-%02d:%02d.txt",
+                    //String.format(Locale.getDefault(),"-%4d.%02d.%02d", cl.get(Calendar.YEAR), cl.get(Calendar.MONTH) + 1, cl.get(Calendar.DAY_OF_MONTH));
+                    String.format(Locale.getDefault(),"-%4d.%02d.%02d-%02d.%02d.txt",
                             cl.get(Calendar.YEAR), cl.get(Calendar.MONTH) + 1, cl.get(Calendar.DAY_OF_MONTH), cl.get(Calendar.HOUR_OF_DAY), cl.get(Calendar.MINUTE));
 
 
@@ -49,11 +50,8 @@ public class NameActivity extends AppCompatActivity {
         fileName.setText(suggestedName);
         fileName.setTextColor(Color.BLACK);
         textView = findViewById(R.id.namemessage);
-        textView.setText("The data files are stored at\n" +
-                "$DEFAULT_EXTRNAL_STORAGE$/ERG/\n\n" +
-                "In case if you don't have SD card, or " +
-                "mounted Read-Only, the files will be stored at\n" +
-                "$DEFAULT_INTERNAL_STORAGE$/ERG/");
+        textView.setText("The data files will be placed in\n" +
+                "~/DOWNLOADS/ERG/");
     }
 
     public void nameButtonClick(View button) {

@@ -2,9 +2,13 @@ package com.ERG.erglogger;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
+import android.provider.Settings;
+
+import androidx.core.os.EnvironmentCompat;
 
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 
@@ -54,7 +58,8 @@ public class Global {
     public static UsbSerialPort port;
     public static int pagesize = 32*4096;
     public static byte[] usb_rx_buffer = new byte[pagesize];        // global directory for ERG-files
-    public static File directory = new File(Environment.getExternalStorageDirectory()+"/ERG/");
+    public static File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/ERG/");
+    //public static File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)+"/ERG/");
 
 
     // rises the ErrorActivity with some stupid message
@@ -217,12 +222,16 @@ public class Global {
         float R1 = (float) 1050.0;   // Ohm
         float R2 = (float) 5000.0;   // Ohm
         float U = (float) u/1000000; // to convert it from nV to mV
-        float T = ((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0;
+        float T = (V*R2*(R0-R1) - U*(R0+R2)*(R1+R2)) / (A0*R0*(U*(R1+R2) - V*R2) + A1*R2*(U*(R1+R2) + V*R1));
+        return T;
+        // old stuff!!!
+        //float T = ((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0;
         // R1 and R2 correction
-        R1 =  R1*(1 + T*A1);
-        R2 =  R2*(1 + T*A2);
-        return (float) Math.floor(10000*((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0)/10000;
+        //R1 =  R1*(1 + T*A1);
+        //R2 =  R2*(1 + T*A2);
+        //return (float) Math.floor(10000*((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0)/10000;
         //return ((R2/R0)*(V*R1 + U*(R1+R2))/(V*R2 - U*(R1+R2)) - 1)/A0;
+
     }
 
     public static float[] LongsToFloats(long[] input) {
@@ -235,5 +244,4 @@ public class Global {
         }
         return output;
     }
-
 }
