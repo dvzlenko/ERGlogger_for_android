@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "com.ERG.erglogger"
-        minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 3
-        versionName "2.00"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 8
+        versionName "2.11"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         setProperty("archivesBaseName", "ERGlogger-$versionName")
